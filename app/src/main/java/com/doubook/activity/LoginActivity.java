@@ -1,0 +1,154 @@
+package com.doubook.activity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
+import android.webkit.DownloadListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Toast;
+
+import com.alibaba.fastjson.JSON;
+import com.doubook.BaseActivty;
+import com.doubook.R;
+import com.doubook.bean.BaseToken;
+import com.doubook.data.ContextData;
+import com.doubook.utiltools.LogsUtils;
+import com.doubook.utiltools.PreferencesUtils;
+import com.doubook.widget.MyProgressWebView;
+import com.zhy.http.okhttp.callback.Callback;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Response;
+
+/**
+ * /登陆界面
+ */
+public class LoginActivity extends BaseActivty {
+    private MyProgressWebView myWebView;
+    //	private Intent intent;
+    private String resultURL;
+    private String code = "";
+
+    @Override
+    protected void initView() {
+        setContentView(R.layout.webloginview);
+        PreferencesUtils.PREFERENCE_NAME = this.getPackageName();
+    }
+
+    @Override
+    protected void initData() {
+        myWebView = (MyProgressWebView) findViewById(R.id.webviewid);
+        initWebView();
+//        DoubookCrawlTest doubookCrawlTest = new DoubookCrawlTest();
+//        String codes = doubookCrawlTest.doLoginByHtmlUnit("ltliyue@gmail.com", "liyue0016");
+//        LogsUtils.e("--->code::" + codes);
+    }
+
+    @Override
+    protected void processClick(View v) {
+
+    }
+
+    private void initWebView() {
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setBuiltInZoomControls(true);// 启用内置缩放装置
+        webSettings.setSupportZoom(false);// 支持缩放
+        webSettings.setUseWideViewPort(true);// 设置此属性，可任意比例缩
+        myWebView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                System.out.println("系统出错");
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                resultURL = myWebView.getUrl();
+                if (resultURL != null) {
+                    resultURL = myWebView.getUrl().split("&")[0];
+                    LogsUtils.e("-->resultURL:" + resultURL);
+                    if (resultURL.contains("code=")) {
+                        code = resultURL.substring(resultURL.indexOf("code=") + 5, resultURL.length());
+                        LogsUtils.e("-->code:" + code);
+                        // 如果获得的code不为空，那么跳到httppost
+                        if (code != "") {
+                            doSomethingInThread(new Runnable() {
+                                public void run() {
+
+                                    Map<String, String> parasMap = new HashMap<String, String>();
+                                    parasMap.put("client_id", ContextData.APIKey);
+                                    parasMap.put("client_secret", ContextData.Secret);
+                                    parasMap.put("redirect_uri", ContextData.redirect_uri);
+                                    parasMap.put("grant_type", "authorization_code");
+                                    parasMap.put("code", code);
+
+                                    loadData(false, ContextData.GetAccessToken, parasMap, new Callback<BaseToken>() {
+
+                                        @Override
+                                        public void onError(Call arg0, Exception arg1, int arg2) {
+                                            LogsUtils.e("-onError->arg1:" + arg1);
+
+                                        }
+
+                                        @Override
+                                        public void onResponse(BaseToken arg0, int arg1) {
+                                            LogsUtils.e("-onResponse->arg1:" + arg1);
+                                        }
+
+                                        @Override
+                                        public BaseToken parseNetworkResponse(Response response, int arg1)
+                                                throws Exception {
+                                            BaseToken baseToken = JSON.parseObject(response.body().string(),
+                                                    BaseToken.class);
+
+                                            LogsUtils.e("-->resultURL222:" + baseToken.getAccess_token());
+                                            PreferencesUtils.putString(LoginActivity.this, "access_token",
+                                                    baseToken.getAccess_token());
+                                            PreferencesUtils.putString(LoginActivity.this, "refresh_token",
+                                                    baseToken.getRefresh_token());
+                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_name",
+                                                    baseToken.getDouban_user_name());
+                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_id",
+                                                    baseToken.getDouban_user_id());
+
+                                            return baseToken;
+                                        }
+                                    });
+                                }
+                            });
+                            Intent mIntent = new Intent();
+                            setResult(101, mIntent);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "系统错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        });
+        myWebView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype,
+                                        long contentLength) {
+                if (url != null && url.startsWith("http://"))
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            }
+        });
+        if (ContextData.LoginURL != null) {
+            myWebView.loadUrl(ContextData.LoginURL);
+            LogsUtils.e("ContextData.LoginURL::" + ContextData.LoginURL);
+        } else {
+            Toast.makeText(LoginActivity.this, "当前文件不存在", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+}

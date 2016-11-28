@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.doubook.widget.MySlideMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:baiduadsdk="http://schemas.android.com/apk/res/com.doubook"
+    android:id="@+id/bidir_sliding_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include layout="@layout/layout_menu_left" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/divider_view"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#ffffff" />
+
+        <include layout="@layout/layout_title" />
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <ProgressBar
+                android:id="@+id/loading"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:layout_gravity="center" >
+            </ProgressBar>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#c6c6c6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp" >
+
+            <RelativeLayout
+                android:id="@+id/message_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/message_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon4" />
+
+                    <TextView
+                        android:id="@+id/message_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="榜单(非虚构)"
+                        android:textColor="#82858b"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contacts_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/contacts_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon3" />
+
+                    <TextView
+                        android:id="@+id/contacts_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="榜单(虚构)"
+                        android:textColor="#82858b"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/news_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/news_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon2" />
+
+                    <TextView
+                        android:id="@+id/news_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="新书(非虚构)"
+                        android:textColor="#82858b"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/setting_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/setting_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon1" />
+
+                    <TextView
+                        android:id="@+id/setting_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="新书(虚构)"
+                        android:textColor="#82858b"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</com.doubook.widget.MySlideMenu>

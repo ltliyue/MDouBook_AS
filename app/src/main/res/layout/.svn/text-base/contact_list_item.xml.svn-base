@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#90cccccc"
+    android:orientation="vertical"
+    android:paddingBottom="1dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="4dp" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:id="@+id/portrait"
+            android:layout_width="95dp"
+            android:layout_height="120dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitStart" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/portrait"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:descendantFocusability="blocksDescendants"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/foodRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="1" />
+
+                <TextView
+                    android:id="@+id/point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_little_black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/bookinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/text_little_black"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

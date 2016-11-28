@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/doubook/adapter
+END
+NewsFragmentPagerAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/doubook/adapter/NewsFragmentPagerAdapter.java
+END
+UserBookListAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/doubook/!svn/ver/81/DouBook_2.11/src/com/doubook/adapter/UserBookListAdapter.java
+END
+ContactListAdapter_NewBook.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/doubook/!svn/ver/78/DouBook_2.11/src/com/doubook/adapter/ContactListAdapter_NewBook.java
+END
+PLListNewAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/doubook/!svn/ver/78/DouBook_2.11/src/com/doubook/adapter/PLListNewAdapter.java
+END
+ContentListNewAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/doubook/!svn/ver/81/DouBook_2.11/src/com/doubook/adapter/ContentListNewAdapter.java
+END
+ContactListAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/doubook/!svn/ver/78/DouBook_2.11/src/com/doubook/adapter/ContactListAdapter.java
+END

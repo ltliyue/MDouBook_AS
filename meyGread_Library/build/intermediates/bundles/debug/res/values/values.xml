@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="SwipeBackLayoutStyle"/>
+    <declare-styleable name="SlidingMenu"><attr name="mode">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr><attr format="reference" name="viewAbove"/><attr format="reference" name="viewBehind"/><attr format="dimension" name="behindOffset"/><attr format="dimension" name="behindWidth"/><attr format="float" name="behindScrollScale"/><attr name="touchModeAbove">
+            <enum name="margin" value="0"/>
+            <enum name="fullscreen" value="1"/>
+            <enum name="none" value="2"/>
+        </attr><attr name="touchModeBehind">
+            <enum name="margin" value="0"/>
+            <enum name="fullscreen" value="1"/>
+            <enum name="none" value="2"/>
+        </attr><attr format="reference" name="shadowDrawable"/><attr format="dimension" name="shadowWidth"/><attr format="boolean" name="fadeEnabled"/><attr format="float" name="fadeDegree"/><attr format="boolean" name="selectorEnabled"/><attr format="reference" name="selectorDrawable"/></declare-styleable>
+    <declare-styleable name="SwipeBackLayout"><attr format="dimension" name="edge_size"/><attr name="edge_flag">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="all" value="3"/>
+        </attr><attr format="reference" name="shadow_left"/><attr format="reference" name="shadow_right"/><attr format="reference" name="shadow_bottom"/></declare-styleable>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <item name="selected_view" type="id"/>
+    <string name="app_name">CatLoadingLibrary</string>
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="SwipeBackLayout">
+        <item name="edge_size">50dip</item>
+        <item name="shadow_left">@drawable/shadow_left</item>
+        <item name="shadow_right">@drawable/shadow_right</item>
+        <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
+    <style name="cart_dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+</resources>

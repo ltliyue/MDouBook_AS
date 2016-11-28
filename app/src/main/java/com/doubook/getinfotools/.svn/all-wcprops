@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/doubook/!svn/ver/78/DouBook_2.11/src/com/doubook/getinfotools
+END
+JsoupOkHttpGetInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/doubook/!svn/ver/81/DouBook_2.11/src/com/doubook/getinfotools/JsoupOkHttpGetInfo.java
+END
+DataCleanManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/doubook/!svn/ver/81/DouBook_2.11/src/com/doubook/getinfotools/DataCleanManager.java
+END
+GetInfoByHttpUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/doubook/!svn/ver/81/DouBook_2.11/src/com/doubook/getinfotools/GetInfoByHttpUtils.java
+END
+JsoupSearchGetInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/doubook/!svn/ver/81/DouBook_2.11/src/com/doubook/getinfotools/JsoupSearchGetInfo.java
+END
+URLtoUTF8.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/doubook/!svn/ver/78/DouBook_2.11/src/com/doubook/getinfotools/URLtoUTF8.java
+END
+JsoupGetInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/doubook/!svn/ver/81/DouBook_2.11/src/com/doubook/getinfotools/JsoupGetInfo.java
+END

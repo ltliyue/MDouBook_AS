@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/xsearch_loading.png",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/bundles/debug/res/drawable-hdpi-v4/xsearch_loading.png"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/bundles/debug/res/drawable-hdpi-v4/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/mouse.png",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/bundles/debug/res/drawable-hdpi-v4/mouse.png"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/bg_black90.9.png",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/bundles/debug/res/drawable-hdpi-v4/bg_black90.9.png"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/eyes.png",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/bundles/debug/res/drawable-hdpi-v4/eyes.png"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/cat.png",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/bundles/debug/res/drawable-hdpi-v4/cat.png"
+    }
+]

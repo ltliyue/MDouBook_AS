@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F5F3"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#7FB80F"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:src="@drawable/back"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="关于"
+            android:textColor="#FFFFFF"
+            android:textSize="17.0sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="15dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:src="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="唯读书"
+                    android:textColor="#1E90FF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Version 2.6.1  Android"
+                    android:textColor="#898989"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
+                    android:lineSpacingMultiplier="1.3"
+                    android:padding="15dp"
+                    android:text="       “人之气质，由于天生，很难改变，唯读书则可以变其气质。古之精于相法者，并言读书可以变换骨相。”"
+                    android:textColor="#898989"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="right"
+                    android:text="----曾国藩 "
+                    android:textColor="#898989"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
+                android:layout_marginTop="10dp"
+                android:lineSpacingMultiplier="1.3"
+                android:padding="15dp"
+                android:text="       唯读书可以查看豆瓣最新权威图书排行榜和新书排行榜；直接通过扫描图书的ISBN号码直接搜索图书，根据书名或者ISBN号码搜索图书，查看书籍详细信息、书籍评分、内容简介和作者简介。"
+                android:textColor="#898989"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="李岳  CopyRight ©2014 VRead. "
+                android:textColor="#999999"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,559 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* AndroidManifest.xml
+* README.txt
+* res/
+* res/anim/
+* res/anim/abc_fade_in.xml
+* res/anim/abc_fade_out.xml
+* res/anim/abc_slide_in_bottom.xml
+* res/anim/abc_slide_in_top.xml
+* res/anim/abc_slide_out_bottom.xml
+* res/anim/abc_slide_out_top.xml
+* res/color/
+* res/color/abc_search_url_text_holo.xml
+* res/drawable-hdpi/
+* res/drawable-hdpi/abc_ab_bottom_solid_dark_holo.9.png
+* res/drawable-hdpi/abc_ab_bottom_solid_light_holo.9.png
+* res/drawable-hdpi/abc_ab_bottom_transparent_dark_holo.9.png
+* res/drawable-hdpi/abc_ab_bottom_transparent_light_holo.9.png
+* res/drawable-hdpi/abc_ab_share_pack_holo_dark.9.png
+* res/drawable-hdpi/abc_ab_share_pack_holo_light.9.png
+* res/drawable-hdpi/abc_ab_solid_dark_holo.9.png
+* res/drawable-hdpi/abc_ab_solid_light_holo.9.png
+* res/drawable-hdpi/abc_ab_stacked_solid_dark_holo.9.png
+* res/drawable-hdpi/abc_ab_stacked_solid_light_holo.9.png
+* res/drawable-hdpi/abc_ab_stacked_transparent_dark_holo.9.png
+* res/drawable-hdpi/abc_ab_stacked_transparent_light_holo.9.png
+* res/drawable-hdpi/abc_ab_transparent_dark_holo.9.png
+* res/drawable-hdpi/abc_ab_transparent_light_holo.9.png
+* res/drawable-hdpi/abc_cab_background_bottom_holo_dark.9.png
+* res/drawable-hdpi/abc_cab_background_bottom_holo_light.9.png
+* res/drawable-hdpi/abc_cab_background_top_holo_dark.9.png
+* res/drawable-hdpi/abc_cab_background_top_holo_light.9.png
+* res/drawable-hdpi/abc_ic_ab_back_holo_dark.png
+* res/drawable-hdpi/abc_ic_ab_back_holo_light.png
+* res/drawable-hdpi/abc_ic_cab_done_holo_dark.png
+* res/drawable-hdpi/abc_ic_cab_done_holo_light.png
+* res/drawable-hdpi/abc_ic_clear_disabled.png
+* res/drawable-hdpi/abc_ic_clear_normal.png
+* res/drawable-hdpi/abc_ic_clear_search_api_disabled_holo_light.png
+* res/drawable-hdpi/abc_ic_clear_search_api_holo_light.png
+* res/drawable-hdpi/abc_ic_commit_search_api_holo_dark.png
+* res/drawable-hdpi/abc_ic_commit_search_api_holo_light.png
+* res/drawable-hdpi/abc_ic_go.png
+* res/drawable-hdpi/abc_ic_go_search_api_holo_light.png
+* res/drawable-hdpi/abc_ic_menu_moreoverflow_normal_holo_dark.png
+* res/drawable-hdpi/abc_ic_menu_moreoverflow_normal_holo_light.png
+* res/drawable-hdpi/abc_ic_menu_share_holo_dark.png
+* res/drawable-hdpi/abc_ic_menu_share_holo_light.png
+* res/drawable-hdpi/abc_ic_search.png
+* res/drawable-hdpi/abc_ic_search_api_holo_light.png
+* res/drawable-hdpi/abc_ic_voice_search.png
+* res/drawable-hdpi/abc_ic_voice_search_api_holo_light.png
+* res/drawable-hdpi/abc_list_divider_holo_dark.9.png
+* res/drawable-hdpi/abc_list_divider_holo_light.9.png
+* res/drawable-hdpi/abc_list_focused_holo.9.png
+* res/drawable-hdpi/abc_list_longpressed_holo.9.png
+* res/drawable-hdpi/abc_list_pressed_holo_dark.9.png
+* res/drawable-hdpi/abc_list_pressed_holo_light.9.png
+* res/drawable-hdpi/abc_list_selector_disabled_holo_dark.9.png
+* res/drawable-hdpi/abc_list_selector_disabled_holo_light.9.png
+* res/drawable-hdpi/abc_menu_dropdown_panel_holo_dark.9.png
+* res/drawable-hdpi/abc_menu_dropdown_panel_holo_light.9.png
+* res/drawable-hdpi/abc_menu_hardkey_panel_holo_dark.9.png
+* res/drawable-hdpi/abc_menu_hardkey_panel_holo_light.9.png
+* res/drawable-hdpi/abc_spinner_ab_default_holo_dark.9.png
+* res/drawable-hdpi/abc_spinner_ab_default_holo_light.9.png
+* res/drawable-hdpi/abc_spinner_ab_disabled_holo_dark.9.png
+* res/drawable-hdpi/abc_spinner_ab_disabled_holo_light.9.png
+* res/drawable-hdpi/abc_spinner_ab_focused_holo_dark.9.png
+* res/drawable-hdpi/abc_spinner_ab_focused_holo_light.9.png
+* res/drawable-hdpi/abc_spinner_ab_pressed_holo_dark.9.png
+* res/drawable-hdpi/abc_spinner_ab_pressed_holo_light.9.png
+* res/drawable-hdpi/abc_tab_selected_focused_holo.9.png
+* res/drawable-hdpi/abc_tab_selected_holo.9.png
+* res/drawable-hdpi/abc_tab_selected_pressed_holo.9.png
+* res/drawable-hdpi/abc_tab_unselected_pressed_holo.9.png
+* res/drawable-hdpi/abc_textfield_search_default_holo_dark.9.png
+* res/drawable-hdpi/abc_textfield_search_default_holo_light.9.png
+* res/drawable-hdpi/abc_textfield_search_right_default_holo_dark.9.png
+* res/drawable-hdpi/abc_textfield_search_right_default_holo_light.9.png
+* res/drawable-hdpi/abc_textfield_search_right_selected_holo_dark.9.png
+* res/drawable-hdpi/abc_textfield_search_right_selected_holo_light.9.png
+* res/drawable-hdpi/abc_textfield_search_selected_holo_dark.9.png
+* res/drawable-hdpi/abc_textfield_search_selected_holo_light.9.png
+* res/drawable-mdpi/
+* res/drawable-mdpi/abc_ab_bottom_solid_dark_holo.9.png
+* res/drawable-mdpi/abc_ab_bottom_solid_light_holo.9.png
+* res/drawable-mdpi/abc_ab_bottom_transparent_dark_holo.9.png
+* res/drawable-mdpi/abc_ab_bottom_transparent_light_holo.9.png
+* res/drawable-mdpi/abc_ab_share_pack_holo_dark.9.png
+* res/drawable-mdpi/abc_ab_share_pack_holo_light.9.png
+* res/drawable-mdpi/abc_ab_solid_dark_holo.9.png
+* res/drawable-mdpi/abc_ab_solid_light_holo.9.png
+* res/drawable-mdpi/abc_ab_stacked_solid_dark_holo.9.png
+* res/drawable-mdpi/abc_ab_stacked_solid_light_holo.9.png
+* res/drawable-mdpi/abc_ab_stacked_transparent_dark_holo.9.png
+* res/drawable-mdpi/abc_ab_stacked_transparent_light_holo.9.png
+* res/drawable-mdpi/abc_ab_transparent_dark_holo.9.png
+* res/drawable-mdpi/abc_ab_transparent_light_holo.9.png
+* res/drawable-mdpi/abc_cab_background_bottom_holo_dark.9.png
+* res/drawable-mdpi/abc_cab_background_bottom_holo_light.9.png
+* res/drawable-mdpi/abc_cab_background_top_holo_dark.9.png
+* res/drawable-mdpi/abc_cab_background_top_holo_light.9.png
+* res/drawable-mdpi/abc_ic_ab_back_holo_dark.png
+* res/drawable-mdpi/abc_ic_ab_back_holo_light.png
+* res/drawable-mdpi/abc_ic_cab_done_holo_dark.png
+* res/drawable-mdpi/abc_ic_cab_done_holo_light.png
+* res/drawable-mdpi/abc_ic_clear_disabled.png
+* res/drawable-mdpi/abc_ic_clear_normal.png
+* res/drawable-mdpi/abc_ic_clear_search_api_disabled_holo_light.png
+* res/drawable-mdpi/abc_ic_clear_search_api_holo_light.png
+* res/drawable-mdpi/abc_ic_commit_search_api_holo_dark.png
+* res/drawable-mdpi/abc_ic_commit_search_api_holo_light.png
+* res/drawable-mdpi/abc_ic_go.png
+* res/drawable-mdpi/abc_ic_go_search_api_holo_light.png
+* res/drawable-mdpi/abc_ic_menu_moreoverflow_normal_holo_dark.png
+* res/drawable-mdpi/abc_ic_menu_moreoverflow_normal_holo_light.png
+* res/drawable-mdpi/abc_ic_menu_share_holo_dark.png
+* res/drawable-mdpi/abc_ic_menu_share_holo_light.png
+* res/drawable-mdpi/abc_ic_search.png
+* res/drawable-mdpi/abc_ic_search_api_holo_light.png
+* res/drawable-mdpi/abc_ic_voice_search.png
+* res/drawable-mdpi/abc_ic_voice_search_api_holo_light.png
+* res/drawable-mdpi/abc_list_divider_holo_dark.9.png
+* res/drawable-mdpi/abc_list_divider_holo_light.9.png
+* res/drawable-mdpi/abc_list_focused_holo.9.png
+* res/drawable-mdpi/abc_list_longpressed_holo.9.png
+* res/drawable-mdpi/abc_list_pressed_holo_dark.9.png
+* res/drawable-mdpi/abc_list_pressed_holo_light.9.png
+* res/drawable-mdpi/abc_list_selector_disabled_holo_dark.9.png
+* res/drawable-mdpi/abc_list_selector_disabled_holo_light.9.png
+* res/drawable-mdpi/abc_menu_dropdown_panel_holo_dark.9.png
+* res/drawable-mdpi/abc_menu_dropdown_panel_holo_light.9.png
+* res/drawable-mdpi/abc_menu_hardkey_panel_holo_dark.9.png
+* res/drawable-mdpi/abc_menu_hardkey_panel_holo_light.9.png
+* res/drawable-mdpi/abc_spinner_ab_default_holo_dark.9.png
+* res/drawable-mdpi/abc_spinner_ab_default_holo_light.9.png
+* res/drawable-mdpi/abc_spinner_ab_disabled_holo_dark.9.png
+* res/drawable-mdpi/abc_spinner_ab_disabled_holo_light.9.png
+* res/drawable-mdpi/abc_spinner_ab_focused_holo_dark.9.png
+* res/drawable-mdpi/abc_spinner_ab_focused_holo_light.9.png
+* res/drawable-mdpi/abc_spinner_ab_pressed_holo_dark.9.png
+* res/drawable-mdpi/abc_spinner_ab_pressed_holo_light.9.png
+* res/drawable-mdpi/abc_tab_selected_focused_holo.9.png
+* res/drawable-mdpi/abc_tab_selected_holo.9.png
+* res/drawable-mdpi/abc_tab_selected_pressed_holo.9.png
+* res/drawable-mdpi/abc_tab_unselected_pressed_holo.9.png
+* res/drawable-mdpi/abc_textfield_search_default_holo_dark.9.png
+* res/drawable-mdpi/abc_textfield_search_default_holo_light.9.png
+* res/drawable-mdpi/abc_textfield_search_right_default_holo_dark.9.png
+* res/drawable-mdpi/abc_textfield_search_right_default_holo_light.9.png
+* res/drawable-mdpi/abc_textfield_search_right_selected_holo_dark.9.png
+* res/drawable-mdpi/abc_textfield_search_right_selected_holo_light.9.png
+* res/drawable-mdpi/abc_textfield_search_selected_holo_dark.9.png
+* res/drawable-mdpi/abc_textfield_search_selected_holo_light.9.png
+* res/drawable-xhdpi/
+* res/drawable-xhdpi/abc_ab_bottom_solid_dark_holo.9.png
+* res/drawable-xhdpi/abc_ab_bottom_solid_light_holo.9.png
+* res/drawable-xhdpi/abc_ab_bottom_transparent_dark_holo.9.png
+* res/drawable-xhdpi/abc_ab_bottom_transparent_light_holo.9.png
+* res/drawable-xhdpi/abc_ab_share_pack_holo_dark.9.png
+* res/drawable-xhdpi/abc_ab_share_pack_holo_light.9.png
+* res/drawable-xhdpi/abc_ab_solid_dark_holo.9.png
+* res/drawable-xhdpi/abc_ab_solid_light_holo.9.png
+* res/drawable-xhdpi/abc_ab_stacked_solid_dark_holo.9.png
+* res/drawable-xhdpi/abc_ab_stacked_solid_light_holo.9.png
+* res/drawable-xhdpi/abc_ab_stacked_transparent_dark_holo.9.png
+* res/drawable-xhdpi/abc_ab_stacked_transparent_light_holo.9.png
+* res/drawable-xhdpi/abc_ab_transparent_dark_holo.9.png
+* res/drawable-xhdpi/abc_ab_transparent_light_holo.9.png
+* res/drawable-xhdpi/abc_cab_background_bottom_holo_dark.9.png
+* res/drawable-xhdpi/abc_cab_background_bottom_holo_light.9.png
+* res/drawable-xhdpi/abc_cab_background_top_holo_dark.9.png
+* res/drawable-xhdpi/abc_cab_background_top_holo_light.9.png
+* res/drawable-xhdpi/abc_ic_ab_back_holo_dark.png
+* res/drawable-xhdpi/abc_ic_ab_back_holo_light.png
+* res/drawable-xhdpi/abc_ic_cab_done_holo_dark.png
+* res/drawable-xhdpi/abc_ic_cab_done_holo_light.png
+* res/drawable-xhdpi/abc_ic_clear_disabled.png
+* res/drawable-xhdpi/abc_ic_clear_normal.png
+* res/drawable-xhdpi/abc_ic_clear_search_api_disabled_holo_light.png
+* res/drawable-xhdpi/abc_ic_clear_search_api_holo_light.png
+* res/drawable-xhdpi/abc_ic_commit_search_api_holo_dark.png
+* res/drawable-xhdpi/abc_ic_commit_search_api_holo_light.png
+* res/drawable-xhdpi/abc_ic_go.png
+* res/drawable-xhdpi/abc_ic_go_search_api_holo_light.png
+* res/drawable-xhdpi/abc_ic_menu_moreoverflow_normal_holo_dark.png
+* res/drawable-xhdpi/abc_ic_menu_moreoverflow_normal_holo_light.png
+* res/drawable-xhdpi/abc_ic_menu_share_holo_dark.png
+* res/drawable-xhdpi/abc_ic_menu_share_holo_light.png
+* res/drawable-xhdpi/abc_ic_search.png
+* res/drawable-xhdpi/abc_ic_search_api_holo_light.png
+* res/drawable-xhdpi/abc_ic_voice_search.png
+* res/drawable-xhdpi/abc_ic_voice_search_api_holo_light.png
+* res/drawable-xhdpi/abc_list_divider_holo_dark.9.png
+* res/drawable-xhdpi/abc_list_divider_holo_light.9.png
+* res/drawable-xhdpi/abc_list_focused_holo.9.png
+* res/drawable-xhdpi/abc_list_longpressed_holo.9.png
+* res/drawable-xhdpi/abc_list_pressed_holo_dark.9.png
+* res/drawable-xhdpi/abc_list_pressed_holo_light.9.png
+* res/drawable-xhdpi/abc_list_selector_disabled_holo_dark.9.png
+* res/drawable-xhdpi/abc_list_selector_disabled_holo_light.9.png
+* res/drawable-xhdpi/abc_menu_dropdown_panel_holo_dark.9.png
+* res/drawable-xhdpi/abc_menu_dropdown_panel_holo_light.9.png
+* res/drawable-xhdpi/abc_menu_hardkey_panel_holo_dark.9.png
+* res/drawable-xhdpi/abc_menu_hardkey_panel_holo_light.9.png
+* res/drawable-xhdpi/abc_spinner_ab_default_holo_dark.9.png
+* res/drawable-xhdpi/abc_spinner_ab_default_holo_light.9.png
+* res/drawable-xhdpi/abc_spinner_ab_disabled_holo_dark.9.png
+* res/drawable-xhdpi/abc_spinner_ab_disabled_holo_light.9.png
+* res/drawable-xhdpi/abc_spinner_ab_focused_holo_dark.9.png
+* res/drawable-xhdpi/abc_spinner_ab_focused_holo_light.9.png
+* res/drawable-xhdpi/abc_spinner_ab_pressed_holo_dark.9.png
+* res/drawable-xhdpi/abc_spinner_ab_pressed_holo_light.9.png
+* res/drawable-xhdpi/abc_tab_selected_focused_holo.9.png
+* res/drawable-xhdpi/abc_tab_selected_holo.9.png
+* res/drawable-xhdpi/abc_tab_selected_pressed_holo.9.png
+* res/drawable-xhdpi/abc_tab_unselected_pressed_holo.9.png
+* res/drawable-xhdpi/abc_textfield_search_default_holo_dark.9.png
+* res/drawable-xhdpi/abc_textfield_search_default_holo_light.9.png
+* res/drawable-xhdpi/abc_textfield_search_right_default_holo_dark.9.png
+* res/drawable-xhdpi/abc_textfield_search_right_default_holo_light.9.png
+* res/drawable-xhdpi/abc_textfield_search_right_selected_holo_dark.9.png
+* res/drawable-xhdpi/abc_textfield_search_right_selected_holo_light.9.png
+* res/drawable-xhdpi/abc_textfield_search_selected_holo_dark.9.png
+* res/drawable-xhdpi/abc_textfield_search_selected_holo_light.9.png
+* res/drawable-xxhdpi/
+* res/drawable-xxhdpi/abc_ab_bottom_solid_dark_holo.9.png
+* res/drawable-xxhdpi/abc_ab_bottom_solid_light_holo.9.png
+* res/drawable-xxhdpi/abc_ab_bottom_transparent_dark_holo.9.png
+* res/drawable-xxhdpi/abc_ab_bottom_transparent_light_holo.9.png
+* res/drawable-xxhdpi/abc_ab_share_pack_holo_dark.9.png
+* res/drawable-xxhdpi/abc_ab_share_pack_holo_light.9.png
+* res/drawable-xxhdpi/abc_ab_solid_dark_holo.9.png
+* res/drawable-xxhdpi/abc_ab_solid_light_holo.9.png
+* res/drawable-xxhdpi/abc_ab_stacked_solid_dark_holo.9.png
+* res/drawable-xxhdpi/abc_ab_stacked_solid_light_holo.9.png
+* res/drawable-xxhdpi/abc_ab_stacked_transparent_dark_holo.9.png
+* res/drawable-xxhdpi/abc_ab_stacked_transparent_light_holo.9.png
+* res/drawable-xxhdpi/abc_ab_transparent_dark_holo.9.png
+* res/drawable-xxhdpi/abc_ab_transparent_light_holo.9.png
+* res/drawable-xxhdpi/abc_cab_background_bottom_holo_dark.9.png
+* res/drawable-xxhdpi/abc_cab_background_bottom_holo_light.9.png
+* res/drawable-xxhdpi/abc_cab_background_top_holo_dark.9.png
+* res/drawable-xxhdpi/abc_cab_background_top_holo_light.9.png
+* res/drawable-xxhdpi/abc_ic_ab_back_holo_dark.png
+* res/drawable-xxhdpi/abc_ic_ab_back_holo_light.png
+* res/drawable-xxhdpi/abc_ic_cab_done_holo_dark.png
+* res/drawable-xxhdpi/abc_ic_cab_done_holo_light.png
+* res/drawable-xxhdpi/abc_ic_clear_disabled.png
+* res/drawable-xxhdpi/abc_ic_clear_normal.png
+* res/drawable-xxhdpi/abc_ic_clear_search_api_disabled_holo_light.png
+* res/drawable-xxhdpi/abc_ic_clear_search_api_holo_light.png
+* res/drawable-xxhdpi/abc_ic_commit_search_api_holo_dark.png
+* res/drawable-xxhdpi/abc_ic_commit_search_api_holo_light.png
+* res/drawable-xxhdpi/abc_ic_go.png
+* res/drawable-xxhdpi/abc_ic_go_search_api_holo_light.png
+* res/drawable-xxhdpi/abc_ic_menu_moreoverflow_normal_holo_dark.png
+* res/drawable-xxhdpi/abc_ic_menu_moreoverflow_normal_holo_light.png
+* res/drawable-xxhdpi/abc_ic_menu_share_holo_dark.png
+* res/drawable-xxhdpi/abc_ic_menu_share_holo_light.png
+* res/drawable-xxhdpi/abc_ic_search.png
+* res/drawable-xxhdpi/abc_ic_search_api_holo_light.png
+* res/drawable-xxhdpi/abc_ic_voice_search.png
+* res/drawable-xxhdpi/abc_ic_voice_search_api_holo_light.png
+* res/drawable-xxhdpi/abc_list_divider_holo_dark.9.png
+* res/drawable-xxhdpi/abc_list_divider_holo_light.9.png
+* res/drawable-xxhdpi/abc_list_focused_holo.9.png
+* res/drawable-xxhdpi/abc_list_longpressed_holo.9.png
+* res/drawable-xxhdpi/abc_list_pressed_holo_dark.9.png
+* res/drawable-xxhdpi/abc_list_pressed_holo_light.9.png
+* res/drawable-xxhdpi/abc_list_selector_disabled_holo_dark.9.png
+* res/drawable-xxhdpi/abc_list_selector_disabled_holo_light.9.png
+* res/drawable-xxhdpi/abc_menu_dropdown_panel_holo_dark.9.png
+* res/drawable-xxhdpi/abc_menu_dropdown_panel_holo_light.9.png
+* res/drawable-xxhdpi/abc_menu_hardkey_panel_holo_dark.9.png
+* res/drawable-xxhdpi/abc_menu_hardkey_panel_holo_light.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_default_holo_dark.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_default_holo_light.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_disabled_holo_dark.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_disabled_holo_light.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_focused_holo_dark.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_focused_holo_light.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_pressed_holo_dark.9.png
+* res/drawable-xxhdpi/abc_spinner_ab_pressed_holo_light.9.png
+* res/drawable-xxhdpi/abc_tab_selected_focused_holo.9.png
+* res/drawable-xxhdpi/abc_tab_selected_holo.9.png
+* res/drawable-xxhdpi/abc_tab_selected_pressed_holo.9.png
+* res/drawable-xxhdpi/abc_tab_unselected_pressed_holo.9.png
+* res/drawable-xxhdpi/abc_textfield_search_default_holo_dark.9.png
+* res/drawable-xxhdpi/abc_textfield_search_default_holo_light.9.png
+* res/drawable-xxhdpi/abc_textfield_search_right_default_holo_dark.9.png
+* res/drawable-xxhdpi/abc_textfield_search_right_default_holo_light.9.png
+* res/drawable-xxhdpi/abc_textfield_search_right_selected_holo_dark.9.png
+* res/drawable-xxhdpi/abc_textfield_search_right_selected_holo_light.9.png
+* res/drawable-xxhdpi/abc_textfield_search_selected_holo_dark.9.png
+* res/drawable-xxhdpi/abc_textfield_search_selected_holo_light.9.png
+* res/drawable/
+* res/drawable/abc_ic_clear.xml
+* res/drawable/abc_ic_clear_holo_light.xml
+* res/drawable/abc_item_background_holo_dark.xml
+* res/drawable/abc_item_background_holo_light.xml
+* res/drawable/abc_list_selector_background_transition_holo_dark.xml
+* res/drawable/abc_list_selector_background_transition_holo_light.xml
+* res/drawable/abc_list_selector_holo_dark.xml
+* res/drawable/abc_list_selector_holo_light.xml
+* res/drawable/abc_search_dropdown_dark.xml
+* res/drawable/abc_search_dropdown_light.xml
+* res/drawable/abc_spinner_ab_holo_dark.xml
+* res/drawable/abc_spinner_ab_holo_light.xml
+* res/drawable/abc_tab_indicator_ab_holo.xml
+* res/drawable/abc_textfield_searchview_holo_dark.xml
+* res/drawable/abc_textfield_searchview_holo_light.xml
+* res/drawable/abc_textfield_searchview_right_holo_dark.xml
+* res/drawable/abc_textfield_searchview_right_holo_light.xml
+* res/layout-v11/
+* res/layout-v11/abc_action_bar_decor.xml
+* res/layout-v11/abc_simple_decor.xml
+* res/layout-v14/
+* res/layout-v14/abc_activity_chooser_view.xml
+* res/layout/
+* res/layout/abc_action_bar_decor.xml
+* res/layout/abc_action_bar_decor_include.xml
+* res/layout/abc_action_bar_decor_overlay.xml
+* res/layout/abc_action_bar_home.xml
+* res/layout/abc_action_bar_tab.xml
+* res/layout/abc_action_bar_tabbar.xml
+* res/layout/abc_action_bar_title_item.xml
+* res/layout/abc_action_bar_view_list_nav_layout.xml
+* res/layout/abc_action_menu_item_layout.xml
+* res/layout/abc_action_menu_layout.xml
+* res/layout/abc_action_mode_bar.xml
+* res/layout/abc_action_mode_close_item.xml
+* res/layout/abc_activity_chooser_view.xml
+* res/layout/abc_activity_chooser_view_include.xml
+* res/layout/abc_activity_chooser_view_list_item.xml
+* res/layout/abc_expanded_menu_layout.xml
+* res/layout/abc_list_menu_item_checkbox.xml
+* res/layout/abc_list_menu_item_icon.xml
+* res/layout/abc_list_menu_item_layout.xml
+* res/layout/abc_list_menu_item_radio.xml
+* res/layout/abc_popup_menu_item_layout.xml
+* res/layout/abc_search_dropdown_item_icons_2line.xml
+* res/layout/abc_search_view.xml
+* res/layout/abc_simple_decor.xml
+* res/layout/support_simple_spinner_dropdown_item.xml
+* res/values-af/
+* res/values-af/strings.xml
+* res/values-am/
+* res/values-am/strings.xml
+* res/values-ar/
+* res/values-ar/strings.xml
+* res/values-bg/
+* res/values-bg/strings.xml
+* res/values-ca/
+* res/values-ca/strings.xml
+* res/values-cs/
+* res/values-cs/strings.xml
+* res/values-da/
+* res/values-da/strings.xml
+* res/values-de/
+* res/values-de/strings.xml
+* res/values-el/
+* res/values-el/strings.xml
+* res/values-en-rGB/
+* res/values-en-rGB/strings.xml
+* res/values-en-rIN/
+* res/values-en-rIN/strings.xml
+* res/values-es-rUS/
+* res/values-es-rUS/strings.xml
+* res/values-es/
+* res/values-es/strings.xml
+* res/values-et-rEE/
+* res/values-et-rEE/strings.xml
+* res/values-fa/
+* res/values-fa/strings.xml
+* res/values-fi/
+* res/values-fi/strings.xml
+* res/values-fr-rCA/
+* res/values-fr-rCA/strings.xml
+* res/values-fr/
+* res/values-fr/strings.xml
+* res/values-hi/
+* res/values-hi/strings.xml
+* res/values-hr/
+* res/values-hr/strings.xml
+* res/values-hu/
+* res/values-hu/strings.xml
+* res/values-hy-rAM/
+* res/values-hy-rAM/strings.xml
+* res/values-in/
+* res/values-in/strings.xml
+* res/values-it/
+* res/values-it/strings.xml
+* res/values-iw/
+* res/values-iw/strings.xml
+* res/values-ja/
+* res/values-ja/strings.xml
+* res/values-ka-rGE/
+* res/values-ka-rGE/strings.xml
+* res/values-km-rKH/
+* res/values-km-rKH/strings.xml
+* res/values-ko/
+* res/values-ko/strings.xml
+* res/values-land/
+* res/values-land/bools.xml
+* res/values-land/config.xml
+* res/values-land/dimens.xml
+* res/values-large-v14/
+* res/values-large-v14/themes_base.xml
+* res/values-large/
+* res/values-large/bools.xml
+* res/values-large/config.xml
+* res/values-large/dimens.xml
+* res/values-large/themes_base.xml
+* res/values-lo-rLA/
+* res/values-lo-rLA/strings.xml
+* res/values-lt/
+* res/values-lt/strings.xml
+* res/values-lv/
+* res/values-lv/strings.xml
+* res/values-mn-rMN/
+* res/values-mn-rMN/strings.xml
+* res/values-ms-rMY/
+* res/values-ms-rMY/strings.xml
+* res/values-nb/
+* res/values-nb/strings.xml
+* res/values-nl/
+* res/values-nl/strings.xml
+* res/values-pl/
+* res/values-pl/strings.xml
+* res/values-pt-rPT/
+* res/values-pt-rPT/strings.xml
+* res/values-pt/
+* res/values-pt/strings.xml
+* res/values-ro/
+* res/values-ro/strings.xml
+* res/values-ru/
+* res/values-ru/strings.xml
+* res/values-sk/
+* res/values-sk/strings.xml
+* res/values-sl/
+* res/values-sl/strings.xml
+* res/values-sr/
+* res/values-sr/strings.xml
+* res/values-sv/
+* res/values-sv/strings.xml
+* res/values-sw/
+* res/values-sw/strings.xml
+* res/values-sw600dp/
+* res/values-sw600dp/config.xml
+* res/values-sw600dp/dimens.xml
+* res/values-th/
+* res/values-th/strings.xml
+* res/values-tl/
+* res/values-tl/strings.xml
+* res/values-tr/
+* res/values-tr/strings.xml
+* res/values-uk/
+* res/values-uk/strings.xml
+* res/values-v11/
+* res/values-v11/styles_base.xml
+* res/values-v11/themes_base.xml
+* res/values-v14/
+* res/values-v14/styles_base.xml
+* res/values-v14/themes_base.xml
+* res/values-vi/
+* res/values-vi/strings.xml
+* res/values-w360dp/
+* res/values-w360dp/dimens.xml
+* res/values-w480dp/
+* res/values-w480dp/bools.xml
+* res/values-w480dp/config.xml
+* res/values-w500dp/
+* res/values-w500dp/dimens.xml
+* res/values-w600dp/
+* res/values-w600dp/dimens.xml
+* res/values-w720dp/
+* res/values-w720dp/bools.xml
+* res/values-xlarge/
+* res/values-xlarge/bools.xml
+* res/values-xlarge/dimens.xml
+* res/values-zh-rCN/
+* res/values-zh-rCN/strings.xml
+* res/values-zh-rHK/
+* res/values-zh-rHK/strings.xml
+* res/values-zh-rTW/
+* res/values-zh-rTW/strings.xml
+* res/values-zu/
+* res/values-zu/strings.xml
+* res/values/
+* res/values/attrs.xml
+* res/values/bools.xml
+* res/values/colors.xml
+* res/values/config.xml
+* res/values/dimens.xml
+* res/values/ids.xml
+* res/values/strings.xml
+* res/values/styles.xml
+* res/values/styles_base.xml
+* res/values/themes.xml
+* res/values/themes_base.xml
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v7-appcompat.jar => com.android.support:appcompat-v7:23.+
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* src/ => androidsupportv7appcompat/src/main/java
+* src/.readme => androidsupportv7appcompat/src/main/resources/.readme
+
+Missing Android Support Repository:
+-----------------------------------
+Some useful libraries, such as the Android Support Library, are
+installed from a special Maven repository, which should be installed
+via the SDK manager.
+
+It looks like this library is missing from your SDK installation at:
+null
+
+To install it, open the SDK manager, and in the Extras category,
+select "Android Support Repository". You may also want to install the
+"Google Repository" if you want to use libraries like Google Play
+Services.
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

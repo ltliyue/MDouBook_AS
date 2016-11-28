@@ -1,0 +1,55 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+        -->
+    </style>
+
+    <style name="radioButtonStyle">
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">2dip</item>
+        <item name="android:paddingTop">3dip</item>
+    </style>
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="top_category_scroll_view_item_text">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>
+        <!-- 设置未浮动窗口 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置无边框 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置无标题 -->
+        <item name="android:windowBackground">@color/transparent</item>
+        <!-- 设置完全透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 设置屏幕变暗 -->
+    </style>
+
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/food_rating_bar_full</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:maxHeight">48dip</item>
+    </style>
+
+</resources>

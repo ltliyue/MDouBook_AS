@@ -1,0 +1,64 @@
+package com.doubook.adapter;
+
+import java.util.List;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.doubook.R;
+import com.doubook.base.MyBaseAdapter;
+import com.doubook.bean.Book;
+import com.doubook.bean.Collections;
+import com.squareup.picasso.Picasso;
+
+public class UserBookListAdapter extends MyBaseAdapter<Collections, ListView> {
+	public UserBookListAdapter(Context context, List<Collections> list) {
+		super(context, list);
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+
+		ViewHolder holder = null;
+		if (convertView == null) {
+
+			holder = new ViewHolder();
+
+			convertView = View.inflate(context, R.layout.contact_list_item, null);
+			holder.ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
+			holder.point = (TextView) convertView.findViewById(R.id.point);
+			holder.imageView = (ImageView) convertView.findViewById(R.id.portrait);
+			holder.name = (TextView) convertView.findViewById(R.id.name);
+			holder.bookinfo = (TextView) convertView.findViewById(R.id.bookinfo);
+			convertView.setTag(holder);
+		} else {
+
+			holder = (ViewHolder) convertView.getTag();
+
+		}
+		Book book = list.get(position).getBook();
+
+		Picasso.with(context).load(book.getImage()).into(holder.imageView);
+		holder.name.setText(book.getTitle());
+		holder.ratingBar.setRating(Float.parseFloat(book.getRating().getAverage()) / 2);
+		holder.point.setText(book.getRating().getAverage() + " (" + book.getRating().getNumRaters() + ")");
+		holder.bookinfo.setText(book.getAuthor().toString() + "/" + book.getPubdate() + "/" + book.getPublisher() + "/"
+				+ book.getPrice() + "/" + book.getBinding());
+
+		return convertView;
+	}
+
+	class ViewHolder {
+		RatingBar ratingBar;
+		TextView point;
+		ImageView imageView;
+		TextView name;
+		TextView bookinfo;
+	}
+
+}

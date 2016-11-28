@@ -1,0 +1,91 @@
+package com.doubook.bean;
+
+import java.io.Serializable;
+
+public class BookInfoBean implements Serializable {
+
+	private static final long serialVersionUID = 4047937294346060846L;
+	private String id;
+	private String name; // 书名
+	private String imageUrl;// 图片地址
+	private String linkUrl;// 链接地址
+	private String bookinfo; // 书信息
+	private String starpoint; // 评分
+	private String EvaluateNum; // 评价数量
+
+	private String up; // 上榜
+	private String buyInfo; // 购买渠道
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getLinkUrl() {
+		return linkUrl;
+	}
+
+	public void setLinkUrl(String linkUrl) {
+		this.linkUrl = linkUrl;
+	}
+
+	public String getBookinfo() {
+		return bookinfo;
+	}
+
+	public void setBookinfo(String bookinfo) {
+		this.bookinfo = bookinfo;
+	}
+
+	public String getStarpoint() {
+		return starpoint;
+	}
+
+	public void setStarpoint(String starpoint) {
+		this.starpoint = starpoint;
+	}
+
+	public String getEvaluateNum() {
+		return EvaluateNum;
+	}
+
+	public void setEvaluateNum(String evaluateNum) {
+		EvaluateNum = evaluateNum;
+	}
+
+	public String getUp() {
+		return up;
+	}
+
+	public void setUp(String up) {
+		this.up = up;
+	}
+
+	public String getBuyInfo() {
+		return buyInfo;
+	}
+
+	public void setBuyInfo(String buyInfo) {
+		this.buyInfo = buyInfo;
+	}
+
+}

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/camera
+END
+AutoFocusCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/camera/AutoFocusCallback.java
+END
+PreviewCallback.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/camera/PreviewCallback.java
+END
+CameraConfigurationManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/camera/CameraConfigurationManager.java
+END
+CameraManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/camera/CameraManager.java
+END
+FlashlightManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/camera/FlashlightManager.java
+END
+PlanarYUVLuminanceSource.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/camera/PlanarYUVLuminanceSource.java
+END

@@ -1,0 +1,10 @@
+package com.doubook.interf;
+
+import java.util.List;
+
+import com.doubook.bean.Collections;
+
+public interface Tab2PageInfoCallback {
+
+	void page2Info(List<Collections> getFirtPageBookInfo, boolean isrefresh);
+}

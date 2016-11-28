@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_top.xml",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/build/intermediates/bundles/debug/res/drawable/indicator_bg_top.xml"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_bottom.xml",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml"
+    }
+]

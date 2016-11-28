@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding
+END
+DecodeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding/DecodeHandler.java
+END
+DecodeFormatManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding/DecodeFormatManager.java
+END
+DecodeThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding/DecodeThread.java
+END
+FinishListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding/FinishListener.java
+END
+Intents.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding/Intents.java
+END
+CaptureActivityHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding/CaptureActivityHandler.java
+END
+InactivityTimer.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/doubook/!svn/ver/77/DouBook_2.11/src/com/mining/app/zxing/decoding/InactivityTimer.java
+END

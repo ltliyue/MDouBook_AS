@@ -1,0 +1,225 @@
+package com.doubook.data;
+
+import java.util.List;
+
+import android.os.SystemClock;
+
+import com.doubook.bean.BookInfoBean;
+import com.doubook.bean.Collections;
+import com.doubook.getinfotools.JsoupGetInfo;
+import com.doubook.getinfotools.JsoupOkHttpGetInfo;
+import com.doubook.interf.Tab1PageInfoCallback;
+import com.doubook.interf.Tab2PageInfoCallback;
+import com.doubook.thread.ExecutorProcessPool;
+
+public class CacheData {
+
+	private static CacheData cacheData;
+
+	public static CacheData getInstence() {
+		if (cacheData == null) {
+			cacheData = new CacheData();
+		}
+		return cacheData;
+	}
+
+	private static List<BookInfoBean> page1BookInfo;
+	private static List<BookInfoBean> page2BookInfo;
+	private static List<BookInfoBean> page3BookInfo;
+	private static List<BookInfoBean> page4BookInfo;
+
+	private static List<Collections> collections_wish;
+	private static List<Collections> collections_read;
+	private static List<Collections> collections_reading;
+
+	public void getTab2PageInfo(Tab2PageInfoCallback tab2PageInfoCallback, String url, boolean isRefresh) {
+		ExecutorProcessPool.getInstance().execute(new MTab2Runable(tab2PageInfoCallback, url, isRefresh));
+	}
+
+	// 刷新
+	public void getPapeInfo(Tab1PageInfoCallback tab1PageInfoCallback, String url, int type, boolean isRefresh) {
+		ExecutorProcessPool.getInstance().execute(new MRunable(tab1PageInfoCallback, url, type, isRefresh));
+	}
+
+	// 首次
+	public void getPapeInfo(Tab1PageInfoCallback tab1PageInfoCallback, String url, int type) {
+		ExecutorProcessPool.getInstance().execute(new MRunable(tab1PageInfoCallback, url, type, false));
+	}
+
+	static class MRunable implements Runnable {
+		private String url;
+		private int type;
+		private Tab1PageInfoCallback tab1PageInfoCallback;
+		private boolean isRefresh;
+
+		public MRunable(Tab1PageInfoCallback tab1PageInfoCallback, String url, int type, boolean isRefresh) {
+			this.url = url;
+			this.type = type;
+			this.tab1PageInfoCallback = tab1PageInfoCallback;
+			this.isRefresh = isRefresh;
+		}
+
+		@Override
+		public void run() {
+			List<BookInfoBean> tempBookInfo = getPageBookInfo(type);
+			if (tempBookInfo != null && tempBookInfo.size() > 0 && !isRefresh) {
+				tab1PageInfoCallback.page1Info(tempBookInfo, false);
+			} else {
+				setPageBookInfo(type, JsoupGetInfo.getInstence().getinfo(url, type));
+				tab1PageInfoCallback.page1Info(getPageBookInfo(type), isRefresh);
+			}
+		}
+
+		private List<BookInfoBean> getPageBookInfo(int type) {
+			switch (type) {
+			case 1:
+				return getPage1BookInfo();
+			case 2:
+				return getPage2BookInfo();
+			case 3:
+				return getPage3BookInfo();
+			case 4:
+				return getPage4BookInfo();
+			default:
+			}
+			return null;
+		}
+
+		private void setPageBookInfo(int type, List<BookInfoBean> bookInfoBeans) {
+			switch (type) {
+			case 1:
+				setPage1BookInfo(bookInfoBeans);
+				break;
+			case 2:
+				setPage2BookInfo(bookInfoBeans);
+				break;
+			case 3:
+				setPage3BookInfo(bookInfoBeans);
+				break;
+			case 4:
+				setPage4BookInfo(bookInfoBeans);
+				break;
+			default:
+			}
+		}
+	}
+
+	/**
+	 * my books
+	 * 
+	 * @author MaryLee
+	 * 
+	 */
+	static class MTab2Runable implements Runnable {
+		private String url;
+		private Tab2PageInfoCallback tab2PageInfoCallback;
+		private boolean isRefresh;
+
+		public MTab2Runable(Tab2PageInfoCallback tab2PageInfoCallback, String url, boolean isRefresh) {
+			this.url = url;
+			this.tab2PageInfoCallback = tab2PageInfoCallback;
+			this.isRefresh = isRefresh;
+		}
+
+		@Override
+		public void run() {
+			List<Collections> tempBookInfo = getPageMyBookInfo(url);
+			if (tempBookInfo != null && tempBookInfo.size() > 0 && !isRefresh) {
+				tab2PageInfoCallback.page2Info(tempBookInfo, false);
+			} else {
+				JsoupOkHttpGetInfo.getInstence().getinfo(url, tab2PageInfoCallback);
+				// tab2PageInfoCallback.page2Info(getPageMyBookInfo(url),
+				// isRefresh);
+			}
+		}
+
+		private List<Collections> getPageMyBookInfo(String type) {
+			switch (type) {
+			case "wish":
+				return getCollections_wish();
+			case "read":
+				return getCollections_read();
+			case "reading":
+				return getCollections_reading();
+			default:
+			}
+			return null;
+		}
+
+	}
+
+	public static void setPageMyBookInfo(String type, List<Collections> collections_) {
+		switch (type) {
+		case "wish":
+			setCollections_wish(collections_);
+		case "read":
+			setCollections_read(collections_);
+		case "reading":
+			setCollections_reading(collections_);
+		default:
+		}
+	}
+
+	public static List<BookInfoBean> getPage1BookInfo() {
+		if (page1BookInfo != null) {
+			return page1BookInfo;
+		} else {
+			SystemClock.sleep(100);
+			getPage1BookInfo();
+		}
+		return page1BookInfo;
+	}
+
+	public static void setPage1BookInfo(List<BookInfoBean> firtPageBookInfo) {
+		CacheData.page1BookInfo = firtPageBookInfo;
+	}
+
+	public static List<BookInfoBean> getPage2BookInfo() {
+		return page2BookInfo;
+	}
+
+	public static void setPage2BookInfo(List<BookInfoBean> page2BookInfo) {
+		CacheData.page2BookInfo = page2BookInfo;
+	}
+
+	public static List<BookInfoBean> getPage3BookInfo() {
+		return page3BookInfo;
+	}
+
+	public static void setPage3BookInfo(List<BookInfoBean> page3BookInfo) {
+		CacheData.page3BookInfo = page3BookInfo;
+	}
+
+	public static List<BookInfoBean> getPage4BookInfo() {
+		return page4BookInfo;
+	}
+
+	public static void setPage4BookInfo(List<BookInfoBean> page4BookInfo) {
+		CacheData.page4BookInfo = page4BookInfo;
+	}
+
+	public static List<Collections> getCollections_wish() {
+		return collections_wish;
+	}
+
+	public static void setCollections_wish(List<Collections> collections_wish) {
+		CacheData.collections_wish = collections_wish;
+	}
+
+	public static List<Collections> getCollections_read() {
+		return collections_read;
+	}
+
+	public static void setCollections_read(List<Collections> collections_read) {
+		CacheData.collections_read = collections_read;
+	}
+
+	public static List<Collections> getCollections_reading() {
+		return collections_reading;
+	}
+
+	public static void setCollections_reading(List<Collections> collections_reading) {
+		CacheData.collections_reading = collections_reading;
+	}
+
+}

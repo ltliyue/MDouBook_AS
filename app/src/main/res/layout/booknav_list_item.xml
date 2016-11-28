@@ -1,0 +1,83 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardElevation="5dp">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/item_bg" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="90dp"
+            android:layout_height="110dp"
+            android:layout_below="@id/bg"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="-30dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/bookimage" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bg"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/img"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:text="画在人心的苦闷上"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="李宗陶深度对话当代现象级艺术家，非虚构写作、人物访谈精心之作"
+                android:textColor="@color/text_little_black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/bg"
+            android:layout_below="@id/bg"
+            android:layout_marginTop="-12dp"
+            android:background="#e76648"
+            android:padding="5dp"
+            android:text="￥26.00"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

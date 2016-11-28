@@ -1,0 +1,319 @@
+package com.doubook.bean;
+
+import org.json.*;
+import java.util.ArrayList;
+
+public class Book {
+
+	private String isbn13;
+	private ArrayList<String> author;
+	private String publisher;
+	private String pages;
+	private String url;
+	private String catalog;
+	private ArrayList<Tags> tags;
+	private String title;
+	private String image;
+	private String summary;
+	private String alt_title;
+	private String isbn10;
+	private Images images;
+	private String alt;
+	private String pubdate;
+	private String id;
+	private String origin_title;
+	private String subtitle;
+	private ArrayList<String> translator;
+	private Series series;
+	private String price;
+	private String binding;
+	private Rating rating;
+	private String author_intro;
+
+	private int plantform;
+
+	public int getPlantform() {
+		return plantform;
+	}
+
+	public void setPlantform(int plantform) {
+		this.plantform = plantform;
+	}
+
+	public Book() {
+
+	}
+
+	public Book(JSONObject json) {
+
+		this.isbn13 = json.optString("isbn13");
+
+		this.author = new ArrayList<String>();
+		JSONArray arrayAuthor = json.optJSONArray("author");
+		if (null != arrayAuthor) {
+			int authorLength = arrayAuthor.length();
+			for (int i = 0; i < authorLength; i++) {
+				String item = arrayAuthor.optString(i);
+				if (null != item) {
+					this.author.add(item);
+				}
+			}
+		} else {
+			String item = json.optString("author");
+			if (null != item) {
+				this.author.add(item);
+			}
+		}
+
+		this.publisher = json.optString("publisher");
+		this.pages = json.optString("pages");
+		this.url = json.optString("url");
+		this.catalog = json.optString("catalog");
+
+		this.tags = new ArrayList<Tags>();
+		JSONArray arrayTags = json.optJSONArray("tags");
+		if (null != arrayTags) {
+			int tagsLength = arrayTags.length();
+			for (int i = 0; i < tagsLength; i++) {
+				JSONObject item = arrayTags.optJSONObject(i);
+				if (null != item) {
+					this.tags.add(new Tags(item));
+				}
+			}
+		} else {
+			JSONObject item = json.optJSONObject("tags");
+			if (null != item) {
+				this.tags.add(new Tags(item));
+			}
+		}
+
+		this.title = json.optString("title");
+		this.image = json.optString("image");
+		this.summary = json.optString("summary");
+		this.alt_title = json.optString("alt_title");
+		this.isbn10 = json.optString("isbn10");
+		this.images = new Images(json.optJSONObject("images"));
+		this.alt = json.optString("alt");
+		this.pubdate = json.optString("pubdate");
+		this.id = json.optString("id");
+		this.origin_title = json.optString("origin_title");
+		this.subtitle = json.optString("subtitle");
+
+		this.translator = new ArrayList<String>();
+		JSONArray arrayTranslator = json.optJSONArray("translator");
+		if (null != arrayTranslator) {
+			int translatorLength = arrayTranslator.length();
+			for (int i = 0; i < translatorLength; i++) {
+				String item = arrayTranslator.optString(i);
+				if (null != item) {
+					this.translator.add(item);
+				}
+			}
+		} else {
+			String item = json.optString("translator");
+			if (null != item) {
+				this.translator.add(item);
+			}
+		}
+
+		this.series = new Series(json.optJSONObject("series"));
+		this.price = json.optString("price");
+		this.binding = json.optString("binding");
+		this.rating = new Rating(json.optJSONObject("rating"));
+		this.author_intro = json.optString("author_intro");
+
+	}
+
+	public String getIsbn13() {
+		return this.isbn13;
+	}
+
+	public void setIsbn13(String isbn13) {
+		this.isbn13 = isbn13;
+	}
+
+	public ArrayList<String> getAuthor() {
+		return this.author;
+	}
+
+	public void setAuthor(ArrayList<String> author) {
+		this.author = author;
+	}
+
+	public String getPublisher() {
+		return this.publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public String getPages() {
+		return this.pages;
+	}
+
+	public void setPages(String pages) {
+		this.pages = pages;
+	}
+
+	public String getUrl() {
+		return this.url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getCatalog() {
+		return this.catalog;
+	}
+
+	public void setCatalog(String catalog) {
+		this.catalog = catalog;
+	}
+
+	public ArrayList<Tags> getTags() {
+		return this.tags;
+	}
+
+	public void setTags(ArrayList<Tags> tags) {
+		this.tags = tags;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getSummary() {
+		return this.summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getIsbn10() {
+		return this.isbn10;
+	}
+
+	public void setIsbn10(String isbn10) {
+		this.isbn10 = isbn10;
+	}
+
+	public Images getImages() {
+		return this.images;
+	}
+
+	public void setImages(Images images) {
+		this.images = images;
+	}
+
+	public String getAlt() {
+		return this.alt;
+	}
+
+	public void setAlt(String alt) {
+		this.alt = alt;
+	}
+
+	public String getPubdate() {
+		return this.pubdate;
+	}
+
+	public void setPubdate(String pubdate) {
+		this.pubdate = pubdate;
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getSubtitle() {
+		return this.subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public ArrayList<String> getTranslator() {
+		return this.translator;
+	}
+
+	public void setTranslator(ArrayList<String> translator) {
+		this.translator = translator;
+	}
+
+	public Series getSeries() {
+		return this.series;
+	}
+
+	public void setSeries(Series series) {
+		this.series = series;
+	}
+
+	public String getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getBinding() {
+		return this.binding;
+	}
+
+	public void setBinding(String binding) {
+		this.binding = binding;
+	}
+
+	public Rating getRating() {
+		return this.rating;
+	}
+
+	public void setRating(Rating rating) {
+		this.rating = rating;
+	}
+
+	public String getAlt_title() {
+		return alt_title;
+	}
+
+	public void setAlt_title(String alt_title) {
+		this.alt_title = alt_title;
+	}
+
+	public String getOrigin_title() {
+		return origin_title;
+	}
+
+	public void setOrigin_title(String origin_title) {
+		this.origin_title = origin_title;
+	}
+
+	public String getAuthor_intro() {
+		return author_intro;
+	}
+
+	public void setAuthor_intro(String author_intro) {
+		this.author_intro = author_intro;
+	}
+
+}

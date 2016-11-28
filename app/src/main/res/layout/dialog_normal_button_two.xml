@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="15.0dip" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/login_edit_pressed"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:gravity="center"
+            android:text="退出"
+            android:textColor="#333333"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dip"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/positiveButton"
+                android:layout_width="110.0dip"
+                android:layout_height="40.0dip"
+                android:background="@drawable/selector_login_btn"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/negativeButton"
+                android:layout_width="110.0dip"
+                android:layout_height="40.0dip"
+                android:layout_marginLeft="20.0dip"
+                android:background="@drawable/selector_login_btn"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

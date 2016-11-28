@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff" >
+
+      <include
+        android:id="@+id/header"
+        layout="@layout/layout_normal_title" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/header" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="aadfasdfadsfadsf"
+                android:textColor="#88000000"
+                android:lineSpacingMultiplier="1.4"
+                android:textSize="15.0sp" />
+
+
+            <TextView
+                android:id="@+id/title2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:lineSpacingMultiplier="1.4"
+                android:text="weag awefawef"
+                android:textColor="#88000000"
+                android:textSize="15.0sp" />
+        </LinearLayout>
+    </ScrollView>
+
+ <!--<include-->
+        <!--android:id="@id/loading_view"-->
+        <!--layout="@layout/custom_progress_dialog_me" />-->
+</RelativeLayout>

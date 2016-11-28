@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#7FB80F"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:src="@drawable/back"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="用户反馈"
+            android:textColor="#FFFFFF"
+            android:textSize="17.0sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:text="反馈"
+            android:textColor="#FFFFFF"
+            android:textSize="17.0sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edit_description"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dip"
+        android:background="@drawable/login_editbox"
+        android:gravity="left"
+        android:hint="请输入您的反馈意见，我们将为您不断改进" />
+
+    <EditText
+        android:id="@+id/edit_relationType"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:background="@drawable/login_editbox"
+        android:hint="联系方式：选填，便于我们给您反馈"
+        android:inputType="number"
+        android:maxLines="2" />
+
+</LinearLayout>
