@@ -1,8 +1,5 @@
 package com.doubook.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -20,9 +17,12 @@ import com.doubook.BaseActivty;
 import com.doubook.R;
 import com.doubook.adapter.NewsFragmentPagerAdapter;
 import com.doubook.bean.PageMenuBean;
-import com.doubook.fragment.Tab1Fragment;
+import com.doubook.fragment.Tab1_TopFragment;
 import com.doubook.utiltools.Tools;
 import com.doubook.view.ColumnHorizontalScrollView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tab_2_TopActivity extends BaseActivty {
     private ViewPager mViewPager;
@@ -185,7 +185,7 @@ public class Tab_2_TopActivity extends BaseActivty {
             data.putInt("typeD", pageMenuBeen.get(i).getTypeD());
             data.putInt("typeX", pageMenuBeen.get(i).getTypeX());
 
-            Tab1Fragment newfragment = new Tab1Fragment();
+            Tab1_TopFragment newfragment = new Tab1_TopFragment();
             newfragment.setArguments(data);
             fragments.add(newfragment);
         }

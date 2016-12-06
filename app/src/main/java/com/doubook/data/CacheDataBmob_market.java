@@ -90,22 +90,25 @@ public class CacheDataBmob_market {
             String result;
             if (FileUtils.isFileExist(FileCache.getCaheDir() + "/getMarketBookInfo") && !isRefresh) {
                 LogsUtils.e(TAG, "-->文件存在&isRefresh=false 在文件中获得Info-->");
+                // 取io缓存
                 result = FileUtils.readFile(
                         FileCache.getCaheDir() + "/getMarketBookInfo",
                         "utf-8").toString();
-//                String[] results = result.split("@@");
-//
-//                String time = results[0];
-//                LogsUtils.e(TAG,"-->time-->" + time);
-//
-//                result = results[1];
+
                 List<MarketBook> list = JSON.parseArray(result, MarketBook.class);
+//                if (list.size() < 2) {
+//                    // 如果io缓存数据错误，删除io缓存
+//                    FileUtils.deleteFile(FileCache.getCaheDir() + "/getMarketBookInfo");
+//                    //去bmob查找
+//                    getInfoFromBmob();
+//
+//                    return;
+//                }
                 LogsUtils.e(TAG, "-->文件存在&isRefresh=false 在文件中获得Info size-->" + list.size());
                 if (tab0PageInfoCallback != null) {
                     tab0PageInfoCallback.page0Info(list, isRefresh);
                 }
                 setMarketBooks(list);
-//                checkTime(time);
             } else {
                 //去bmob查找
                 getInfoFromBmob();
@@ -138,13 +141,18 @@ public class CacheDataBmob_market {
                         tab0PageInfoCallback.page0Info(list, isRefresh);
                     }
                     LogsUtils.e(TAG, "-->文件不存在||isRefresh=true 去服务器获得info size-->" + list.size());
-                    setMarketBooks(list);
-                    boolean isDelete = FileUtils.deleteFile(FileCache.getCaheDir() + "/getMarketBookInfo");
-                    LogsUtils.e(TAG, "-->文件是否删除成功" + isDelete);
-                    boolean isSave = FileUtils.writeFile(
-                            FileCache.getCaheDir() + "/getMarketBookInfo",
-                            JSON.toJSONString(list));
-                    LogsUtils.e(TAG, "-->文件是否保存成功" + isSave);
+
+                    if (list.size() > 2) { // 数据正确再存io
+                        setMarketBooks(list);
+
+                        boolean isDelete = FileUtils.deleteFile(FileCache.getCaheDir() + "/getMarketBookInfo");
+                        LogsUtils.e(TAG, "-->文件是否删除成功" + isDelete);
+                        boolean isSave = FileUtils.writeFile(
+                                FileCache.getCaheDir() + "/getMarketBookInfo",
+                                JSON.toJSONString(list));
+                        LogsUtils.e(TAG, "-->文件是否保存成功" + isSave);
+
+                    }
                 }
             });
         }

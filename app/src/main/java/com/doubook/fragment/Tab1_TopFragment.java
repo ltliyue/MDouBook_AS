@@ -16,8 +16,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.doubook.activity.BookInfo_APIActivity;
 import com.doubook.R;
+import com.doubook.activity.BookInfo_APIActivity;
 import com.doubook.adapter.ContentListAdapter;
 import com.doubook.bean.BookInfoBean;
 import com.doubook.data.CacheDataBmob_topnew;
@@ -29,7 +29,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
 
-public class Tab1Fragment extends Fragment implements Tab1PageInfoCallback {
+public class Tab1_TopFragment extends Fragment implements Tab1PageInfoCallback {
 
 	private int scrollPos = 0;
 	private int scrollTop = 5;
@@ -89,7 +89,7 @@ public class Tab1Fragment extends Fragment implements Tab1PageInfoCallback {
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				// refreshThreadGetInfo();
-				CacheDataBmob_topnew.getInstence().getPapeInfo(Tab1Fragment.this, text, type,true);
+				CacheDataBmob_topnew.getInstence().getPapeInfo(Tab1_TopFragment.this, text, type,true);
 //				CacheData.getInstence().getPapeInfo(Tab1Fragment.this, text, type, true);
 			}
 		});

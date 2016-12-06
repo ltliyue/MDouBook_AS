@@ -31,20 +31,26 @@ public class Tab_Main3Activity extends BaseActivty {
     private CircularImage user_photo;
     private TextView username, txt_zd, txt_dg, txt_xd, txt_hc;
     private Intent mIntent;
+    private  String cacheSize;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             // TODO Auto-generated method stub
             super.handleMessage(msg);
-            if (msg.what == 1) {
-                if (!"".equals(PreferencesUtils.getString(Tab_Main3Activity.this, "imageSrc", ""))) {
-                    Picasso.with(ct).load(PreferencesUtils.getString(Tab_Main3Activity.this, "imageSrc", "")).into(user_photo);
-                }
-                username.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "userName", ""));
-                txt_zd.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "reading", ""));
-                txt_dg.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "read", ""));
-                txt_xd.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "wish", ""));
-                initDataListener();
+            switch (msg.what){
+                case 1:
+                    if (!"".equals(PreferencesUtils.getString(Tab_Main3Activity.this, "imageSrc", ""))) {
+                        Picasso.with(ct).load(PreferencesUtils.getString(Tab_Main3Activity.this, "imageSrc", "")).into(user_photo);
+                    }
+                    username.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "userName", ""));
+                    txt_zd.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "reading", ""));
+                    txt_dg.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "read", ""));
+                    txt_xd.setText(PreferencesUtils.getString(Tab_Main3Activity.this, "wish", ""));
+                    initDataListener();
+                    break;
+                case 0:
+                    txt_hc.setText(cacheSize);
+                    break;
             }
         }
     };
@@ -73,45 +79,38 @@ public class Tab_Main3Activity extends BaseActivty {
         lin_lxw = (LinearLayout) findViewById(R.id.lin_lxw);
         lin_fk = (LinearLayout) findViewById(R.id.lin_fk);
 
-        txt_hc = (TextView) findViewById(R.id.txt_hc);
-        FileCache fileCache = new FileCache(this);
-
-        txt_hc.setText(fileCache.getCacheSize());
-
         lin_about = (LinearLayout) findViewById(R.id.lin_about);
+
+        txt_hc = (TextView) findViewById(R.id.txt_hc);
+
+        doSomethingInThread(new Runnable() {
+            @Override
+            public void run() {
+                FileCache fileCache = new FileCache(Tab_Main3Activity.this);
+                cacheSize = fileCache.getCacheSize();
+                mHandler.sendEmptyMessage(0);
+            }
+        });
 
         initUserData();
     }
 
     @Override
     protected void processClick(View v) {
-        lin_lxw.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent mIntent = new Intent(Tab_Main3Activity.this, Tab3_lxw_Activity.class);
+        switch (v.getId()){
+            case R.id.lin_lxw:
+                mIntent = new Intent(Tab_Main3Activity.this, Tab3_lxw_Activity.class);
                 startActivity(mIntent);
-            }
-        });
-        lin_fk.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent mIntent = new Intent(Tab_Main3Activity.this, Tab3_FKActivity.class);
+                break;
+            case R.id.lin_fk:
+                mIntent = new Intent(Tab_Main3Activity.this, Tab3_FKActivity.class);
                 startActivity(mIntent);
-            }
-        });
-        lin_about.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                Intent mIntent = new Intent(Tab_Main3Activity.this, Tab3_AboutActivity.class);
+                break;
+            case R.id.lin_about:
+                mIntent = new Intent(Tab_Main3Activity.this, Tab3_AboutActivity.class);
                 startActivity(mIntent);
-            }
-        });
+                break;
+        }
     }
 
     private void initDataListener() {

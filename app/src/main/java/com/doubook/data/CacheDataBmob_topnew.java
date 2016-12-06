@@ -69,29 +69,24 @@ public class CacheDataBmob_topnew {
                 result = FileUtils.readFile(
                         FileCache.getCaheDir() + "/getBookInfo" + typeD + "" + typeX,
                         "utf-8").toString();
-//                String[] results = result.split("@@");
-//
-//                String time = results[0];
-//                LogsUtils.e("-->time-->" + time);
-//
-//                result = results[1];
 
                 List<BookInfoBean> list = JSON.parseArray(result, BookInfoBean.class);
+//                if (list.size() < 2) {
+//                    // 如果io缓存数据错误，删除io缓存
+//                    FileUtils.deleteFile(FileCache.getCaheDir() + "/getMarketBookInfo");
+//                    //去bmob查找
+//                    getInfoFromBmob();
+//
+//                    return;
+//                }
                 tab1PageInfoCallback.page1Info(list, isRefresh);
 
                 setPageBookInfo((typeD + typeX * 2), list);
-//                checkTime(time);
             } else {
                 //去bmob查找
                 getInfoFromBmob();
             }
         }
-
-//        private void checkTime(String time) {
-//            if (CalendarUtils.getDaySplite(Long.parseLong(time)) > 2) {
-//                getInfoFromBmob();
-//            }
-//        }
 
         public void getInfoFromBmob() {
             BmobQuery<BookInfoBean> bookInfoBeanBmobQuery = new BmobQuery<BookInfoBean>();
@@ -105,14 +100,16 @@ public class CacheDataBmob_topnew {
                 @Override
                 public void done(List<BookInfoBean> list, BmobException e) {
 
-                    tab1PageInfoCallback.page1Info(list, isRefresh);
-                    setPageBookInfo((typeD + typeX * 2), list);
-                    boolean isDelete = FileUtils.deleteFile(FileCache.getCaheDir() + "/getBookInfo" + typeD + "" + typeX);
-                    LogsUtils.e(TAG, "-->文件是否删除成功" + isDelete);
-                    boolean isSave = FileUtils.writeFile(
-                            FileCache.getCaheDir() + "/getBookInfo" + typeD + "" + typeX,
-                            JSON.toJSONString(list));
-                    LogsUtils.e(TAG, "-->文件是否保存成功" + isSave);
+                    if (list.size() > 2) { // 数据正确再存io
+                        tab1PageInfoCallback.page1Info(list, isRefresh);
+                        setPageBookInfo((typeD + typeX * 2), list);
+                        boolean isDelete = FileUtils.deleteFile(FileCache.getCaheDir() + "/getBookInfo" + typeD + "" + typeX);
+                        LogsUtils.e(TAG, "-->文件是否删除成功" + isDelete);
+                        boolean isSave = FileUtils.writeFile(
+                                FileCache.getCaheDir() + "/getBookInfo" + typeD + "" + typeX,
+                                JSON.toJSONString(list));
+                        LogsUtils.e(TAG, "-->文件是否保存成功" + isSave);
+                    }
                 }
             });
         }

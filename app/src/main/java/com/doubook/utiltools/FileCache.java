@@ -10,14 +10,15 @@ public class FileCache {
     public FileCache(Context context) {
         // 判断外存SD卡挂载状态，如果挂载正常，创建SD卡缓存文件夹
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-            cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "VRead");
+//            cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "VRead");
+            cacheDir = new File(FileCache.getCaheDir());
         } else {
             // SD卡挂载不正常，获取本地缓存文件夹（应用包所在目录）
             cacheDir = context.getCacheDir();
         }
-        if (!cacheDir.exists()) {
-            cacheDir.mkdirs();
-        }
+//        if (!cacheDir.exists()) {
+//            cacheDir.mkdirs();
+//        }
     }
 
     public static String getCaheDir() {
@@ -60,7 +61,12 @@ public class FileCache {
                 size += f.length();
             }
         }
-        String cacheSize = String.valueOf(size / 1024 / 1024) + "M";
+        String cacheSize;
+        if (size / 1024 > 1024) {
+            cacheSize = String.valueOf(size / 1024 / 1024) + " M";
+        }else {
+            cacheSize = String.valueOf(size / 1024) + " K";
+        }
         return cacheSize;
     }
 

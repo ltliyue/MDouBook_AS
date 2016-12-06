@@ -17,7 +17,8 @@ import com.doubook.BaseActivty;
 import com.doubook.R;
 import com.doubook.adapter.NewsFragmentPagerAdapter;
 import com.doubook.bean.PageMenuBean;
-import com.doubook.fragment.Tab1Fragment;
+import com.doubook.fragment.Tab1_SuperFragment;
+import com.doubook.fragment.Tab1_TopFragment;
 import com.doubook.utiltools.Tools;
 import com.doubook.view.ColumnHorizontalScrollView;
 
@@ -117,13 +118,11 @@ public class Tab_2_SuperActivity extends BaseActivty {
     private void initColumnData() {
         pageMenuBeen = new ArrayList<>();
         PageMenuBean menu1 = new PageMenuBean();
-        menu1.setTitle("图书榜(非虚构)");
+        menu1.setTitle("jd");
         menu1.setTypeD(1);
-        menu1.setTypeX(1);
         PageMenuBean menu2 = new PageMenuBean();
-        menu2.setTitle("图书榜(虚构)");
+        menu2.setTitle("haha");
         menu2.setTypeD(1);
-        menu2.setTypeX(0);
 
         pageMenuBeen.add(menu1);
         pageMenuBeen.add(menu2);
@@ -185,7 +184,7 @@ public class Tab_2_SuperActivity extends BaseActivty {
             data.putInt("typeD", pageMenuBeen.get(i).getTypeD());
             data.putInt("typeX", pageMenuBeen.get(i).getTypeX());
 
-            Tab1Fragment newfragment = new Tab1Fragment();
+            Tab1_SuperFragment newfragment = new Tab1_SuperFragment();
             newfragment.setArguments(data);
             fragments.add(newfragment);
         }
