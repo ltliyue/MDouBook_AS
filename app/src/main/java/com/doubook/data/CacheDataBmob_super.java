@@ -11,6 +11,7 @@ import com.doubook.utiltools.FileUtils;
 import com.doubook.utiltools.LogsUtils;
 import com.doubook.utiltools.TimeCompare;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -30,8 +31,8 @@ public class CacheDataBmob_super {
     }
 
     // 刷新
-    public void getPapeInfo(BookInfoSuperCallback bookInfoSuperCallback, int plantform,boolean isRefresh) {
-        ExecutorProcessPool.getInstance().execute(new MRunable(bookInfoSuperCallback, plantform,isRefresh));
+    public void getPapeInfo(BookInfoSuperCallback bookInfoSuperCallback, int plantform, boolean isRefresh) {
+        ExecutorProcessPool.getInstance().execute(new MRunable(bookInfoSuperCallback, plantform, isRefresh));
     }
 
     // 首次
@@ -39,7 +40,7 @@ public class CacheDataBmob_super {
         if (getBookInfo(plantform) != null) {
             bookInfoSuperCallback.bookInfo(getBookInfo(plantform), false);
         } else {
-            ExecutorProcessPool.getInstance().execute(new MRunable(bookInfoSuperCallback, plantform,false));
+            ExecutorProcessPool.getInstance().execute(new MRunable(bookInfoSuperCallback, plantform, false));
         }
     }
 
@@ -58,16 +59,16 @@ public class CacheDataBmob_super {
         @Override
         public void run() {
             String result;
-            if (FileUtils.isFileExist(FileCache.getCaheDir() + "/superBookInfo") && !isRefresh) {
+            if (FileUtils.isFileExist(FileCache.getCaheDir() + "/superBookInfo"+plantform) && !isRefresh) {
                 result = FileUtils.readFile(
-                        FileCache.getCaheDir() + "/superBookInfo",
+                        FileCache.getCaheDir() + "/superBookInfo"+plantform,
                         "utf-8").toString();
 
                 List<Book> list = JSON.parseArray(result, Book.class);
 
-                handleBookInfo(list);
+                setBookInfo(list,plantform);
+                bookInfoSuperCallback.bookInfo(list, isRefresh);
 
-                bookInfoSuperCallback.bookInfo(getBookInfo(plantform), isRefresh);
             } else {
                 //去bmob查找
                 getInfoFromBmob();
@@ -76,7 +77,9 @@ public class CacheDataBmob_super {
 
         public void getInfoFromBmob() {
             BmobQuery<Book> bookInfoBeanBmobQuery = new BmobQuery<Book>();
+            bookInfoBeanBmobQuery.addWhereEqualTo("plantform", plantform);
             if (!TextUtils.isEmpty(CacheData.createdAt)) {
+                LogsUtils.e("-->CacheData.createdAt-->"+CacheData.createdAt);
                 LogsUtils.e(TAG, "-->文件不存在||isRefresh=true createdAt-->" + CacheData.createdAt);
                 bookInfoBeanBmobQuery.addWhereGreaterThan("createdAt", new BmobDate(TimeCompare.StringToDate(CacheData.createdAt)));
             }
@@ -84,14 +87,18 @@ public class CacheDataBmob_super {
                 @Override
                 public void done(List<Book> list, BmobException e) {
 
-                    handleBookInfo(list);
-                    bookInfoSuperCallback.bookInfo(getBookInfo(plantform), isRefresh);
-                    boolean isDelete = FileUtils.deleteFile(FileCache.getCaheDir() + "/superBookInfo");
-                    LogsUtils.e(TAG, "-->文件是否删除成功" + isDelete);
-                    boolean isSave = FileUtils.writeFile(
-                            FileCache.getCaheDir() + "/getBookInfo",
-                            JSON.toJSONString(list));
-                    LogsUtils.e(TAG, "-->文件是否保存成功" + isSave);
+                    if (e == null) {
+                        setBookInfo(list,plantform);
+                        bookInfoSuperCallback.bookInfo(list, isRefresh);
+                        boolean isDelete = FileUtils.deleteFile(FileCache.getCaheDir() + "/superBookInfo"+plantform);
+                        LogsUtils.e(TAG, "-->文件是否删除成功" + isDelete);
+                        boolean isSave = FileUtils.writeFile(
+                                FileCache.getCaheDir() + "/superBookInfo"+plantform,
+                                JSON.toJSONString(list));
+                        LogsUtils.e(TAG, "-->文件是否保存成功" + isSave);
+                    }else {
+                        LogsUtils.e(e.getMessage());
+                    }
                 }
             });
         }
@@ -101,20 +108,21 @@ public class CacheDataBmob_super {
     private static List<Book> bookInfo_dd;
     private static List<Book> bookInfo_amazon;
 
-    public static void handleBookInfo(List<Book> bookInfo) {
-        for (Book book : bookInfo) {
-            switch (book.getPlantform()) {
+    public static void setBookInfo(List<Book> bookInfo,int plantform) {
+            switch (plantform) {
                 case 1:
-                    bookInfo_jd.add(book);
+                    bookInfo_jd = new ArrayList<>();
+                    bookInfo_jd = bookInfo;
                     break;
                 case 2:
-                    bookInfo_dd.add(book);
+                    bookInfo_dd = new ArrayList<>();
+                    bookInfo_dd = bookInfo;
                     break;
                 case 3:
-                    bookInfo_amazon.add(book);
+                    bookInfo_amazon = new ArrayList<>();
+                    bookInfo_amazon = bookInfo;
                     break;
             }
-        }
     }
 
     public static List<Book> getBookInfo(int plantfrom) {
@@ -126,7 +134,9 @@ public class CacheDataBmob_super {
             case 3:
                 return bookInfo_amazon;
             default:
+                LogsUtils.e("--->default-->");
                 return null;
         }
     }
+
 }

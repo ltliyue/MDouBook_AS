@@ -1,0 +1,199 @@
+{
+    "android_gradle_plugin_version": "2.2.3",
+    "apk_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/build/outputs/apk/app-debug.apk",
+    "apt": {
+        
+    },
+    "apt_libraries": {
+        "dagger": false,
+        "butterknife": false
+    },
+    "auto_dependency": true,
+    "build_cache_dir": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/build/freeline",
+    "build_directory": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/build",
+    "build_script": "./gradlew :app:assembleDebug",
+    "build_script_work_directory": "",
+    "build_tools_directory": "/Users/MaryLee/Android/adt-bundle-mac-x86_64-20140702/sdk/build-tools/23.0.1",
+    "build_tools_version": "23.0.1",
+    "compile_sdk_directory": "/Users/MaryLee/Android/adt-bundle-mac-x86_64-20140702/sdk/platforms/android-17",
+    "compile_sdk_version": "android-17",
+    "databinding": [
+        
+    ],
+    "databinding_compiler_jar": "",
+    "databinding_modules": [
+        
+    ],
+    "debug_package": "com.doubook",
+    "exclude_dep_res_paths": [
+        
+    ],
+    "extra_dep_res_paths": [
+        
+    ],
+    "freeline_cache_dir": "/Users/MaryLee/AndroidStudioProjects/MDouBook",
+    "freeline_gradle_plugin_version": "0.8.4",
+    "java_home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home",
+    "launcher": "com.doubook.activity.WelcomeActivity",
+    "main_assets_directory": [
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/assets",
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/assets"
+    ],
+    "main_jniLibs_directory": [
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/jniLibs",
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/jniLibs"
+    ],
+    "main_jni_directory": [
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/jni",
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/jni"
+    ],
+    "main_manifest_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/AndroidManifest.xml",
+    "main_project_dir": "app",
+    "main_project_name": "app",
+    "main_r_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/build/generated/source/r/debug/R.java",
+    "main_res_directory": [
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/res",
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/res"
+    ],
+    "main_src_directory": [
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/java",
+        "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/java"
+    ],
+    "module_dependencies": {
+        "app": [
+            "meyGread_Library",
+            "pulltorefresh_library",
+            "cardview"
+        ],
+        "cardview": [
+            
+        ],
+        "meyGread_Library": [
+            
+        ],
+        "pulltorefresh_library": [
+            
+        ]
+    },
+    "modules": [
+        {
+            "name": "app",
+            "path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app"
+        },
+        {
+            "name": "meyGread_Library",
+            "path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library"
+        },
+        {
+            "name": "pulltorefresh_library",
+            "path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library"
+        },
+        {
+            "name": "cardview",
+            "path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview"
+        }
+    ],
+    "package": "com.doubook",
+    "product_flavor": "",
+    "project_source_sets": {
+        "app": {
+            "main_assets_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/assets",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/jniLibs",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/jni",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/jni"
+            ],
+            "main_manifest_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/res",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/res"
+            ],
+            "main_src_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/java",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/java"
+            ]
+        },
+        "cardview": {
+            "main_assets_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/assets",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/jniLibs",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/jni",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/jni"
+            ],
+            "main_manifest_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/res",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/res"
+            ],
+            "main_src_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/java",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/java"
+            ]
+        },
+        "meyGread_Library": {
+            "main_assets_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/release/assets",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/release/jniLibs",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/release/jni",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/jni"
+            ],
+            "main_manifest_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/release/res",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res"
+            ],
+            "main_src_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/release/java",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/java"
+            ]
+        },
+        "pulltorefresh_library": {
+            "main_assets_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/release/assets",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/release/jniLibs",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/release/jni",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/main/jni"
+            ],
+            "main_manifest_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/release/res",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/main/res"
+            ],
+            "main_src_directory": [
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/release/java",
+                "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library/src/main/java"
+            ]
+        }
+    },
+    "project_type": "gradle",
+    "retrolambda": {
+        
+    },
+    "root_dir": "/Users/MaryLee/AndroidStudioProjects/MDouBook",
+    "sdk_directory": "/Users/MaryLee/Android/adt-bundle-mac-x86_64-20140702/sdk",
+    "use_jdk8": true
+}

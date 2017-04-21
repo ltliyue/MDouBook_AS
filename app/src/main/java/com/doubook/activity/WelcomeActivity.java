@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -43,6 +44,9 @@ public class WelcomeActivity extends BaseActivty {
     protected void initView() {
         this.setContentView(R.layout.welcome);
         Bmob.initialize(this, ContextData.BmobAPPID);
+        // 使用推送服务时的初始化操作
+        BmobInstallation.getCurrentInstallation().save();
+
         PreferencesUtils.PREFERENCE_NAME = this.getPackageName();
     }
 
@@ -53,6 +57,18 @@ public class WelcomeActivity extends BaseActivty {
             showToast("当前网络不可用，请连接网络后重试");
             return;
         }
+//        UserInfoBean userInfoBean = new UserInfoBean();
+//        userInfoBean.setObjectId(Tools.getImeiCode(this));
+//        userInfoBean.update(new UpdateListener() {
+//            @Override
+//            public void done(BmobException e) {
+//                if (e==null){
+//                    LogsUtils.i("bmobObjectId","更新成功");
+//                }
+//            }
+//        });
+
+
 //        CacheData.setCreatedAt(PreferencesUtils.getString(ct, "updateTime", ""));
 //        ExecutorProcessFixedPool.getInstance().execute(new Runnable() {
 //            @Override

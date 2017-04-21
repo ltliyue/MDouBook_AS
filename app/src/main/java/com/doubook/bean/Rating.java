@@ -8,7 +8,7 @@ public class Rating {
     private double min;
     private String average;
     private double max;
-    private double numRaters;
+    private int numRaters;
     
     
 	public Rating () {
@@ -20,7 +20,7 @@ public class Rating {
         this.min = json.optDouble("min");
         this.average = json.optString("average");
         this.max = json.optDouble("max");
-        this.numRaters = json.optDouble("numRaters");
+        this.numRaters = json.optInt("numRaters");
 
     }
     
@@ -48,11 +48,11 @@ public class Rating {
         this.max = max;
     }
 
-    public double getNumRaters() {
+    public int getNumRaters() {
         return this.numRaters;
     }
 
-    public void setNumRaters(double numRaters) {
+    public void setNumRaters(int numRaters) {
         this.numRaters = numRaters;
     }
 

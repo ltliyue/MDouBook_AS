@@ -1,8 +1,10 @@
 package com.doubook.bean;
 
-import org.json.*;
+import org.json.JSONObject;
 
-public class UserInfoBean {
+import cn.bmob.v3.BmobObject;
+
+public class UserInfoBean extends BmobObject{
 
 	private String id;
 	private String large_avatar;
@@ -18,6 +20,9 @@ public class UserInfoBean {
 	private boolean is_suicide;
 	private String alt;
 	private String name;
+
+	private User user;
+	private String loc;
 
 	public UserInfoBean() {
 		// TODO Auto-generated constructor stub
@@ -154,4 +159,19 @@ public class UserInfoBean {
 		this.name = name;
 	}
 
+	public String getLoc() {
+		return loc;
+	}
+
+	public void setLoc(String loc) {
+		this.loc = loc;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

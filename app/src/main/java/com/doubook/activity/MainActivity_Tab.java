@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,17 +19,19 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.mey.slidingmenu.lib.SlidingMenu;
 import com.doubook.R;
+import com.doubook.activity.map.MarkerClickActivity;
 import com.doubook.bean.BaseCollection;
 import com.doubook.bean.BookInfoBean_Api;
+import com.doubook.bean.User;
 import com.doubook.bean.UserInfoBean;
 import com.doubook.data.CacheData;
 import com.doubook.data.ContextData;
 import com.doubook.thread.ExecutorProcessFixedPool;
-import com.doubook.thread.ExecutorProcessPool;
 import com.doubook.utiltools.LogsUtils;
 import com.doubook.utiltools.PreferencesUtils;
 import com.doubook.utiltools.ScreenUtils;
@@ -40,6 +44,9 @@ import com.zhy.http.okhttp.callback.Callback;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -47,10 +54,13 @@ public class MainActivity_Tab extends TabActivity {
     private TextView username, desc, txt_wish, txt_reading, txt_read;
     private CircularImage user_photo;
     private int wish = 0, reading = 0, read = 0;
-    private UserInfoBean userInfoBean;
+
     private TextView Title;
     private ImageView btn_search, btn_back;
     private SlidingMenu menu;
+
+    private UserInfoBean userInfoBean;
+    private User user;
     /**
      * 选项卡按钮ID数组
      **/
@@ -83,12 +93,19 @@ public class MainActivity_Tab extends TabActivity {
                     break;
                 case 2:
                     Picasso.with(MainActivity_Tab.this).load(userInfoBean.getLarge_avatar()).into(user_photo);
-
                     username.setText(userInfoBean.getName());
                     desc.setText(userInfoBean.getDesc());
-                    PreferencesUtils.putString(MainActivity_Tab.this, "imageSrc", userInfoBean.getLarge_avatar());
-                    PreferencesUtils.putString(MainActivity_Tab.this, "userName", userInfoBean.getName());
-                    getBookNum();
+//                    getBookNum();
+                    break;
+                case 3:
+                    User user = (User) msg.obj;
+                    if (TextUtils.isEmpty(user.getLarge_avatar())){
+                        Picasso.with(MainActivity_Tab.this).load(R.drawable.icon).into(user_photo);
+                    }else {
+                        Picasso.with(MainActivity_Tab.this).load(userInfoBean.getLarge_avatar()).into(user_photo);
+                    }
+                    username.setText(user.getUsername());
+                    desc.setText(user.getDesc());
                     break;
                 case 11:
                     txt_wish.setText("想读的书（" + wish + "）");
@@ -116,7 +133,8 @@ public class MainActivity_Tab extends TabActivity {
         // WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         AppManager.getAppManager().addActivity(MainActivity_Tab.this);
         setContentView(R.layout.activity_main_tab);
-//        getUserInfo();
+        //获得用户信息
+        getUserInfo();
         // ---------------------实例化滑动菜单对象--------------------------
         menu = new SlidingMenu(this);
         // 设置可以左右滑动菜单
@@ -275,7 +293,7 @@ public class MainActivity_Tab extends TabActivity {
         tabhost.addTab(tabhost.newTabSpec("top").setIndicator("11")
                 .setContent(new Intent(this, Tab_Main2Activity.class)));
         tabhost.addTab(tabhost.newTabSpec("dou").setIndicator("22")
-                .setContent(new Intent(this, Tab_MyDouActivity.class)));
+                .setContent(new Intent(this, MarkerClickActivity.class)));
         tabhost.addTab(tabhost.newTabSpec("more").setIndicator("33")
                 .setContent(new Intent(this, Tab_Main3Activity.class)));
         for (int i = 0; i < radioButton.length; i++) {
@@ -297,37 +315,29 @@ public class MainActivity_Tab extends TabActivity {
      * 用户信息
      */
     private void getUserInfo() {
-        ExecutorProcessPool.getInstance().execute(new Runnable() {
-
-            @Override
-            public void run() {
-                if (!"".equals(PreferencesUtils.getString(MainActivity_Tab.this, "access_token", ""))) {
-                    isLogin = true;
-                    String url = ContextData.GetUserInfo
-                            + PreferencesUtils.getString(MainActivity_Tab.this, "douban_user_id") + "?Authorization="
-                            + PreferencesUtils.getString(MainActivity_Tab.this, "access_token");
-                    LogsUtils.e("-->url:" + url);
-                    OkHttpUtils.get().url(url).build().execute(new Callback<UserInfoBean>() {
-
-                        @Override
-                        public void onError(Call arg0, Exception arg1, int arg2) {
-                            LogsUtils.e("-main->onError:" + arg1);
-                        }
-
-                        @Override
-                        public void onResponse(UserInfoBean arg0, int arg1) {
-                        }
-
-                        @Override
-                        public UserInfoBean parseNetworkResponse(Response arg0, int arg1) throws Exception {
-                            userInfoBean = JSON.parseObject(arg0.body().string(), UserInfoBean.class);
+        User user = User.getCurrentUser(User.class);
+        if (user != null) {
+            if (user.isAuthorization()) {
+                BmobQuery<UserInfoBean> bmobQuery = new BmobQuery<>();
+                bmobQuery.addWhereEqualTo("id", user.getDou_id());
+                bmobQuery.findObjects(new FindListener<UserInfoBean>() {
+                    @Override
+                    public void done(List<UserInfoBean> list, BmobException e) {
+                        if (e == null) {
+                            userInfoBean = list.get(0);
                             mHandler.sendEmptyMessage(2);
-                            return userInfoBean;
+                        } else {
+                            Toast.makeText(MainActivity_Tab.this, "获取用户信息失败", Toast.LENGTH_SHORT).show();
                         }
-                    });
-                }
+                    }
+                });
+            }else {
+                Message message = mHandler.obtainMessage();
+                message.what = 3;
+                message.obj = user;
+                mHandler.sendMessage(message);
             }
-        });
+        }
     }
 
     /**
@@ -342,10 +352,11 @@ public class MainActivity_Tab extends TabActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == 100 && resultCode == 101) {
-            mHandler.sendEmptyMessageDelayed(1, 2000);
-        }
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        System.out.println("----onNewIntent--->");
+        getUserInfo();
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

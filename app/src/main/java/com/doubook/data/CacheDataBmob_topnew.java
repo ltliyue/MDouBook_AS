@@ -93,6 +93,7 @@ public class CacheDataBmob_topnew {
             bookInfoBeanBmobQuery.addWhereEqualTo("typeD", typeD);
             bookInfoBeanBmobQuery.addWhereEqualTo("typeX", typeX);
             if (!TextUtils.isEmpty(CacheData.createdAt)) {
+                LogsUtils.e("-->CacheData.createdAt-->"+CacheData.createdAt);
                 LogsUtils.e(TAG, "-->文件不存在||isRefresh=true createdAt-->" + CacheData.createdAt);
                 bookInfoBeanBmobQuery.addWhereGreaterThan("createdAt", new BmobDate(TimeCompare.StringToDate(CacheData.createdAt)));
             }

@@ -94,7 +94,10 @@ public class BookInfo_APIActivity extends BaseActivty {
 		lin_context_writer = (LinearLayout) findViewById(R.id.lin_context_writer);
 		lin_context_booklist = (LinearLayout) findViewById(R.id.lin_context_booklist);
 
-		bookid = getIntent().getStringExtra("linkUrl").split("subject/")[1].replace("/", "");
+		bookid = getIntent().getStringExtra("linkUrl");
+		if (bookid.contains("subject/") ) {
+			bookid= bookid.split("subject/")[1].replace("/", "");
+		}
 		showLonding();
 
 		btn_back.setOnClickListener(this);

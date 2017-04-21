@@ -118,14 +118,18 @@ public class Tab_2_SuperActivity extends BaseActivty {
     private void initColumnData() {
         pageMenuBeen = new ArrayList<>();
         PageMenuBean menu1 = new PageMenuBean();
-        menu1.setTitle("jd");
-        menu1.setTypeD(1);
+        menu1.setTitle("京东");
+        menu1.setId(1);
         PageMenuBean menu2 = new PageMenuBean();
-        menu2.setTitle("haha");
-        menu2.setTypeD(1);
+        menu2.setTitle("当当");
+        menu2.setId(2);
+        PageMenuBean menu3 = new PageMenuBean();
+        menu3.setTitle("亚马逊");
+        menu3.setId(3);
 
         pageMenuBeen.add(menu1);
         pageMenuBeen.add(menu2);
+        pageMenuBeen.add(menu3);
 
         setChangelView();
 
@@ -181,8 +185,7 @@ public class Tab_2_SuperActivity extends BaseActivty {
         fragments.clear();// 清空
         for (int i = 0; i < pageMenuBeen.size(); i++) {
             Bundle data = new Bundle();
-            data.putInt("typeD", pageMenuBeen.get(i).getTypeD());
-            data.putInt("typeX", pageMenuBeen.get(i).getTypeX());
+            data.putInt("plantfrom", pageMenuBeen.get(i).getId());
 
             Tab1_SuperFragment newfragment = new Tab1_SuperFragment();
             newfragment.setArguments(data);

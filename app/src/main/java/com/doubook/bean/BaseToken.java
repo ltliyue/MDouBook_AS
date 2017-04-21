@@ -1,7 +1,9 @@
 package com.doubook.bean;
 
 
-public class BaseToken {
+import cn.bmob.v3.BmobObject;
+
+public class BaseToken extends BmobObject{
 
 	private String refresh_token;
 	private double expires_in;

@@ -14,6 +14,8 @@ import com.doubook.thread.ExecutorProcessFixedPool;
 import com.doubook.thread.ExecutorProcessPool;
 import com.doubook.utiltools.CommonUtil;
 import com.doubook.utiltools.CustomToast;
+import com.doubook.view.CustomProgressDialog;
+import com.doubook.view.DialogUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -21,120 +23,132 @@ import java.util.Map;
 
 public abstract class BaseActivty extends SwipeBackActivity implements OnClickListener {
 
-	protected Context ct;
-	protected MApplication app;
+    protected Context ct;
+    protected MApplication app;
 
-	public MApplication getApp() {
-		return app;
-	}
+    public MApplication getApp() {
+        return app;
+    }
 
-	public void setApp(MApplication app) {
-		this.app = app;
-	}
+    public void setApp(MApplication app) {
+        this.app = app;
+    }
 
-	protected View loadingView;
-	protected TextView title_title, setting;
-	protected ImageView btn_back;
+    protected View loadingView;
+    protected TextView title_title, setting;
+    protected ImageView btn_back;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		AppManager.getAppManager().addActivity(this);
-		app = (MApplication) getApplication();
-		ct = this;
-		ExecutorProcessPool.getInstance();
-		ExecutorProcessFixedPool.getInstance();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AppManager.getAppManager().addActivity(this);
+        app = (MApplication) getApplication();
+        ct = this;
+        ExecutorProcessPool.getInstance();
+        ExecutorProcessFixedPool.getInstance();
 
-		initView();
-		loadingView = findViewById(R.id.loading_view);
-		title_title = (TextView) findViewById(R.id.title_title);
-		setting = (TextView) findViewById(R.id.setting);
-		btn_back = (ImageView) findViewById(R.id.btn_back);
-		initData();
-	}
+        initView();
+        loadingView = findViewById(R.id.loading_view);
+        title_title = (TextView) findViewById(R.id.title_title);
+        setting = (TextView) findViewById(R.id.setting);
+        btn_back = (ImageView) findViewById(R.id.btn_back);
+        initData();
+    }
 
-	public void setTitle(String title) {
-		title_title.setText(title);
-	}
+    public void setTitle(String title) {
+        title_title.setText(title);
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getAppManager().finishActivity(this);
+    }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_back) {
+            finish();
+        }
+        processClick(v);
+    }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		AppManager.getAppManager().finishActivity(this);
-	}
+    protected void showToast(String msg) {
+        CustomToast customToast = new CustomToast(ct, msg);
+        customToast.show();
+    }
 
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.btn_back) {
-			finish();
-		}
-		processClick(v);
-	}
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
-	protected void showToast(String msg) {
-		CustomToast customToast = new CustomToast(ct, msg);
-		customToast.show();
-	}
+    public void showLonding() {
+        if (loadingView != null)
+            loadingView.setVisibility(View.VISIBLE);
+    }
 
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-	}
+    public void missLonding() {
+        if (loadingView != null)
+            loadingView.setVisibility(View.GONE);
+    }
 
-	public void showLonding() {
-		if (loadingView != null)
-			loadingView.setVisibility(View.VISIBLE);
-	}
+    protected abstract void initView();
 
-	public void missLonding() {
-		if (loadingView != null)
-			loadingView.setVisibility(View.GONE);
-	}
+    protected abstract void initData();
 
-	protected abstract void initView();
+    protected abstract void processClick(View v);
 
-	protected abstract void initData();
+    protected void doSomethingInThread(Runnable runnable) {
+        ExecutorProcessPool.getInstance().execute(runnable);
+    }
 
-	protected abstract void processClick(View v);
+    protected void loadData(boolean isGet, String url, Map<String, String> params, Callback callback) {
+        if (0 == CommonUtil.isNetworkAvailable(ct)) {
+            showToast("当前网络不可用，请检查网络设置！");
+            // missLonding();
+            return;
+        }
+        if (isGet) {
+            OkHttpUtils.get().url(url).params(params).build().execute(callback);
+        } else {
+            OkHttpUtils.post().url(url).params(params).build().execute(callback);
+        }
+    }
 
-	protected void doSomethingInThread(Runnable runnable) {
-		ExecutorProcessPool.getInstance().execute(runnable);
-	}
+    @Override
+    protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+        super.onActivityResult(arg0, arg1, arg2);
+    }
 
-	protected void loadData(boolean isGet, String url, Map<String, String> params, Callback callback) {
-		if (0 == CommonUtil.isNetworkAvailable(ct)) {
-			showToast("当前网络不可用，请检查网络设置！");
-			// missLonding();
-			return;
-		}
-		if (isGet) {
-			OkHttpUtils.get().url(url).params(params).build().execute(callback);
-		} else {
-			OkHttpUtils.post().url(url).params(params).build().execute(callback);
-		}
-	}
+    @Override
+    public void startActivity(Intent intent) {
+        // TODO Auto-generated method stub
+        super.startActivity(intent);
+        // overridePendingTransition(R.anim.slide_in_right,
+        // R.anim.slide_out_left);
+    }
 
-	@Override
-	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		super.onActivityResult(arg0, arg1, arg2);
-	}
+    // -----dialog---
+    protected CustomProgressDialog dialog;
 
-	@Override
-	public void startActivity(Intent intent) {
-		// TODO Auto-generated method stub
-		super.startActivity(intent);
-		// overridePendingTransition(R.anim.slide_in_right,
-		// R.anim.slide_out_left);
-	}
-	
+    protected void showProgressDialog(String content) {
+        if (dialog == null && ct != null) {
+            dialog = (CustomProgressDialog) DialogUtil.createProgressDialog(ct, content);
+        }
+        dialog.show();
+    }
+
+    protected void showProgressDialog() {
+        if (dialog == null && ct != null) {
+            dialog = (CustomProgressDialog) DialogUtil.createProgressDialog(ct);
+        }
+        dialog.show();
+    }
+
+    protected void closeProgressDialog() {
+        if (dialog != null)
+            dialog.dismiss();
+    }
+
 }

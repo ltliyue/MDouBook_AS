@@ -72,6 +72,10 @@ public class Tab_Main2Activity extends BaseActivty {
                 mIntent = new Intent(ct, Tab_2_TopActivity.class);
                 startActivity(mIntent);
                 break;
+            case R.id.lin3:
+                mIntent = new Intent(ct, Tab_2_SuperActivity.class);
+                startActivity(mIntent);
+                break;
         }
     }
 

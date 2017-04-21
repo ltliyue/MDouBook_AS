@@ -4,33 +4,42 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.doubook.BaseActivty;
 import com.doubook.R;
-import com.doubook.bean.BaseToken;
-import com.doubook.data.ContextData;
-import com.doubook.utiltools.LogsUtils;
+import com.doubook.bean.User;
+import com.doubook.bean.UserInfoBean;
 import com.doubook.utiltools.PreferencesUtils;
-import com.zhy.http.okhttp.callback.Callback;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Response;
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
+
+import static com.doubook.R.id.user;
 
 /**
  * /登陆界面
+ * 用户名
+ * 密码
  */
 public class LoginMeActivity extends BaseActivty {
 
     private EditText et_username;
-    private EditText et_password;
+    private EditText et_pwd;
+    private TextView tv_register;
     private Button btn_login;
+    private ImageView dou_login_btn;
     private String code = "";
-    String user;
-    String pwd;
+    private String username;
+    private String pwd;
+    private Intent mIntent;
+
 
     @Override
     protected void initView() {
@@ -41,100 +50,49 @@ public class LoginMeActivity extends BaseActivty {
     @Override
     protected void initData() {
         et_username = (EditText) findViewById(R.id.et_username);
-        et_password = (EditText) findViewById(R.id.et_password);
+        et_pwd = (EditText) findViewById(R.id.et_pwd);
+
+        tv_register = (TextView) findViewById(R.id.tv_register);
         btn_login = (Button) findViewById(R.id.btn_login);
+        dou_login_btn = (ImageView) findViewById(R.id.dou_login_btn);
+        tv_register.setOnClickListener(this);
         btn_login.setOnClickListener(this);
+        dou_login_btn.setOnClickListener(this);
     }
 
     protected void doLogin() {
 
-        user = et_username.getText().toString();
-        pwd = et_password.getText().toString();
+        username = et_username.getText().toString();
+        pwd = et_pwd.getText().toString();
         if ("".equals(user)) {
-            showToast("用户名为空");
+            showToast("抱歉，用户名为空");
             return;
         }
         if ("".equals(pwd)) {
-            showToast("密码为空");
+            showToast("抱歉，密码为空");
             return;
         }
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("a", user);
-        params.put("b", pwd);
-        loadData(true, "http://meyao.uicp.net/Shopping/DouBookServlet", params, new Callback() {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(pwd);
+        user.login(new SaveListener<UserInfoBean>() {
             @Override
-            public Object parseNetworkResponse(Response response, int id) throws Exception {
-                code = response.body().string();
-                LogsUtils.e("code::"+code);
-                doSave();
-                return code;
-            }
-
-            @Override
-            public void onError(Call call, Exception e, int id) {
-
-            }
-
-            @Override
-            public void onResponse(Object response, int id) {
-
+            public void done(UserInfoBean userInfoBean, BmobException e) {
+                if (e == null) {
+                    showToast("登录成功:");
+                    //通过BmobUser user = BmobUser.getCurrentUser()获取登录成功后的本地用户信息
+                    //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(MyUser.class)获取自定义用户信息
+                    Intent mIntent = new Intent(LoginMeActivity.this, MainActivity_Tab.class);
+                    startActivity(mIntent);
+                    finish();
+                } else {
+                    showToast(e.getMessage());
+                }
             }
         });
-    }
-
-    private void doSave() {
-        LogsUtils.e("dosave");
-        if (code != "") {
-            doSomethingInThread(new Runnable() {
-                public void run() {
-
-                    Map<String, String> parasMap = new HashMap<String, String>();
-                    parasMap.put("client_id", ContextData.APIKey);
-                    parasMap.put("client_secret", ContextData.Secret);
-                    parasMap.put("redirect_uri", ContextData.redirect_uri);
-                    parasMap.put("grant_type", "authorization_code");
-                    parasMap.put("code", code);
-
-                    loadData(false, ContextData.GetAccessToken, parasMap, new Callback<BaseToken>() {
-
-                        @Override
-                        public void onError(Call arg0, Exception arg1, int arg2) {
-                            LogsUtils.e("-onError->arg1:" + arg1);
-
-                        }
-
-                        @Override
-                        public void onResponse(BaseToken arg0, int arg1) {
-                            LogsUtils.e("-onResponse->arg1:" + arg1);
-                        }
-
-                        @Override
-                        public BaseToken parseNetworkResponse(Response response, int arg1)
-                                throws Exception {
-                            BaseToken baseToken = JSON.parseObject(response.body().string(),
-                                    BaseToken.class);
-
-                            LogsUtils.e("-->resultURL222:" + baseToken.getAccess_token());
-                            PreferencesUtils.putString(ct, "access_token",
-                                    baseToken.getAccess_token());
-                            PreferencesUtils.putString(ct, "refresh_token",
-                                    baseToken.getRefresh_token());
-                            PreferencesUtils.putString(ct, "douban_user_name",
-                                    baseToken.getDouban_user_name());
-                            PreferencesUtils.putString(ct, "douban_user_id",
-                                    baseToken.getDouban_user_id());
-
-                            return baseToken;
-                        }
-                    });
-                }
-            });
-            Intent mIntent = new Intent();
-            setResult(101, mIntent);
-            finish();
-        } else {
-            showToast("系统错误");
-        }
+//        Intent mIntent = new Intent(LoginMeActivity.this, LoginMe2Activity.class);
+//        startActivity(mIntent);
+//        AppManager.getAppManager().addActivity(this);
     }
 
     @Override
@@ -143,6 +101,40 @@ public class LoginMeActivity extends BaseActivty {
         switch (v.getId()) {
             case R.id.btn_login:
                 doLogin();
+                break;
+            case R.id.dou_login_btn:
+                BmobQuery<User> bmobQuery = new BmobQuery<>();
+                bmobQuery.addWhereEqualTo("installationId", BmobInstallation.getInstallationId(LoginMeActivity.this));
+                bmobQuery.findObjects(new FindListener<User>() {
+                    @Override
+                    public void done(List<User> list, BmobException e) {
+                        if (e == null) {
+                            list.get(0).login(new SaveListener<UserInfoBean>() {
+                                @Override
+                                public void done(UserInfoBean userInfoBean, BmobException e) {
+                                    if (e == null) {
+                                        closeProgressDialog();
+                                        showToast("登录成功~");
+                                        mIntent = new Intent(LoginMeActivity.this, MainActivity_Tab.class);
+                                        startActivity(mIntent);
+                                        finish();
+                                    } else {
+                                        showToast(e.getMessage());
+                                    }
+                                }
+                            });
+                        } else {
+                            mIntent = new Intent(LoginMeActivity.this, LoginActivity.class);
+                            startActivity(mIntent);
+                            finish();
+                        }
+                    }
+                });
+
+                break;
+            case R.id.tv_register:
+                mIntent = new Intent(this, RegisterActivity.class);
+                startActivity(mIntent);
                 break;
         }
     }

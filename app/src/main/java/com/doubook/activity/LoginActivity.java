@@ -13,20 +13,26 @@ import com.alibaba.fastjson.JSON;
 import com.doubook.BaseActivty;
 import com.doubook.R;
 import com.doubook.bean.BaseToken;
+import com.doubook.bean.User;
+import com.doubook.bean.UserInfoBean;
 import com.doubook.data.ContextData;
 import com.doubook.utiltools.LogsUtils;
 import com.doubook.utiltools.PreferencesUtils;
 import com.doubook.widget.MyProgressWebView;
+import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 import okhttp3.Call;
 import okhttp3.Response;
 
 /**
- * /登陆界面
+ * /登陆界面Web
  */
 public class LoginActivity extends BaseActivty {
     private MyProgressWebView myWebView;
@@ -81,6 +87,7 @@ public class LoginActivity extends BaseActivty {
                         LogsUtils.e("-->code:" + code);
                         // 如果获得的code不为空，那么跳到httppost
                         if (code != "") {
+                            showProgressDialog();
                             doSomethingInThread(new Runnable() {
                                 public void run() {
 
@@ -110,24 +117,34 @@ public class LoginActivity extends BaseActivty {
                                             BaseToken baseToken = JSON.parseObject(response.body().string(),
                                                     BaseToken.class);
 
-                                            LogsUtils.e("-->resultURL222:" + baseToken.getAccess_token());
-                                            PreferencesUtils.putString(LoginActivity.this, "access_token",
-                                                    baseToken.getAccess_token());
-                                            PreferencesUtils.putString(LoginActivity.this, "refresh_token",
-                                                    baseToken.getRefresh_token());
-                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_name",
-                                                    baseToken.getDouban_user_name());
-                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_id",
-                                                    baseToken.getDouban_user_id());
+                                            getUserInfo(baseToken);
+
+                                            baseToken.save(new SaveListener<String>() {
+                                                @Override
+                                                public void done(String s, BmobException e) {
+                                                    if (e == null) {
+                                                        LogsUtils.i("baseToken saved !");
+                                                    } else {
+                                                        LogsUtils.i("baseToken save failed !");
+                                                    }
+                                                }
+                                            });
+
+//                                            LogsUtils.e("-->resultURL222:" + baseToken.getAccess_token());
+//                                            PreferencesUtils.putString(LoginActivity.this, "access_token",
+//                                                    baseToken.getAccess_token());
+//                                            PreferencesUtils.putString(LoginActivity.this, "refresh_token",
+//                                                    baseToken.getRefresh_token());
+//                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_name",
+//                                                    baseToken.getDouban_user_name());
+//                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_id",
+//                                                    baseToken.getDouban_user_id());
 
                                             return baseToken;
                                         }
                                     });
                                 }
                             });
-                            Intent mIntent = new Intent();
-                            setResult(101, mIntent);
-                            finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "系统错误", Toast.LENGTH_SHORT).show();
                         }
@@ -151,4 +168,97 @@ public class LoginActivity extends BaseActivty {
         }
     }
 
+    /**
+     * 用户信息
+     */
+    private void getUserInfo(BaseToken baseToken) {
+
+//        final BaseToken baseToken_f = baseToken;
+
+        String url = ContextData.GetUserInfo + baseToken.getDouban_user_id() + "?Authorization=" + baseToken.getAccess_token();
+        LogsUtils.e("-->url:" + url);
+        OkHttpUtils.get().url(url).build().execute(new Callback<UserInfoBean>() {
+
+            @Override
+            public void onError(Call arg0, Exception arg1, int arg2) {
+                LogsUtils.e("-main->onError:" + arg1);
+            }
+
+            @Override
+            public void onResponse(UserInfoBean arg0, int arg1) {
+            }
+
+            @Override
+            public UserInfoBean parseNetworkResponse(Response arg0, int arg1) throws Exception {
+                UserInfoBean userInfoBean_dou = JSON.parseObject(arg0.body().string(), UserInfoBean.class);
+                saveNewAccount(userInfoBean_dou);
+                return userInfoBean_dou;
+            }
+        });
+
+    }
+
+    private void login(User user) {
+        //登录本地账户
+        user.login(new SaveListener<UserInfoBean>() {
+            @Override
+            public void done(UserInfoBean userInfoBean, BmobException e) {
+                if (e == null) {
+                    closeProgressDialog();
+                    showToast("登录成功~");
+                    Intent mIntent = new Intent(LoginActivity.this, MainActivity_Tab.class);
+                    startActivity(mIntent);
+                    finish();
+                } else {
+                    showToast(e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void saveDouAccount(UserInfoBean userInfoBean_dou) {
+        //保存豆瓣账户&&关联本地账户
+//        userInfoBean_dou.setInstallationId(BmobInstallation.getInstallationId(LoginActivity.this));
+        userInfoBean_dou.save(new SaveListener<String>() {
+            @Override
+            public void done(String o, BmobException e) {
+                if (e == null) {
+                    LogsUtils.i("getUserInfo-->成功保存豆瓣账户");
+                } else {
+                    LogsUtils.i("getUserInfo-->失败");
+                }
+            }
+        });
+    }
+
+    /**
+     * 保存本地账户
+     *
+     * @param userInfoBean_dou
+     */
+    private void saveNewAccount(final UserInfoBean userInfoBean_dou) {
+
+        User user = new User();
+        user.setUsername(userInfoBean_dou.getName());
+        user.setPassword(userInfoBean_dou.getName());
+        user.setDou_id(userInfoBean_dou.getId());
+        user.setAuthorization(true);//豆瓣账号
+        user.setInstallationId(BmobInstallation.getInstallationId(LoginActivity.this));
+        user.signUp(new SaveListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if (e == null) {
+                    LogsUtils.i("注册本地账号成功");
+                    //登录
+                    login(user);
+
+                    userInfoBean_dou.setUser(user);
+                    //保存豆瓣账户&&关联本地账户
+                    saveDouAccount(userInfoBean_dou);
+                } else {
+                    LogsUtils.e(e.getMessage());
+                }
+            }
+        });
+    }
 }

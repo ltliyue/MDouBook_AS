@@ -18,10 +18,10 @@ import android.widget.Toast;
 
 import com.doubook.R;
 import com.doubook.activity.BookInfo_APIActivity;
-import com.doubook.adapter.ContentListAdapter;
-import com.doubook.bean.BookInfoBean;
-import com.doubook.data.CacheDataBmob_topnew;
-import com.doubook.interf.Tab1PageInfoCallback;
+import com.doubook.adapter.ContentList_SuperAdapter;
+import com.doubook.bean.Book;
+import com.doubook.data.CacheDataBmob_super;
+import com.doubook.interf.BookInfoSuperCallback;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnLastItemVisibleListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -29,17 +29,16 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
 
-public class Tab1_SuperFragment extends Fragment implements Tab1PageInfoCallback {
+public class Tab1_SuperFragment extends Fragment implements BookInfoSuperCallback {
 
 	private int scrollPos = 0;
 	private int scrollTop = 5;
 
-	private int text;
-	private int type;
+	private int plantfrom;
 
 	private PullToRefreshListView pullToRefreshList = null;
-	private ContentListAdapter dataAdapter = null;
-	private List<BookInfoBean> contacters;
+	private ContentList_SuperAdapter dataAdapter = null;
+	private List<Book> contacters;
 
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
@@ -49,15 +48,15 @@ public class Tab1_SuperFragment extends Fragment implements Tab1PageInfoCallback
 
 			switch (msg.what) {
 			case 1:
-				contacters = (List<BookInfoBean>) msg.obj;
-				dataAdapter = new ContentListAdapter(getActivity(), contacters);
+				contacters = (List<Book>) msg.obj;
+				dataAdapter = new ContentList_SuperAdapter(getActivity(), contacters);
 				pullToRefreshList.setAdapter(dataAdapter);
 				// pullToRefreshList.setSelection(scrollPos);
 				break;
 
 			case 2:
 				contacters.clear();
-				contacters.addAll((List<BookInfoBean>) msg.obj);
+				contacters.addAll((List<Book>) msg.obj);
 				Toast.makeText(getActivity(), "刷新成功~", Toast.LENGTH_SHORT).show();
 				dataAdapter.notifyDataSetChanged();
 				pullToRefreshList.onRefreshComplete();
@@ -79,8 +78,7 @@ public class Tab1_SuperFragment extends Fragment implements Tab1PageInfoCallback
 		View view = LayoutInflater.from(getActivity()).inflate(R.layout.list_layout, null);
 		pullToRefreshList = (PullToRefreshListView) view.findViewById(R.id.list_of_contact);
 		Bundle args = getArguments();
-		text = args != null ? args.getInt("typeD") : 1;
-		type = args != null ? args.getInt("typeX") : 1;
+		plantfrom = args != null ? args.getInt("plantfrom") : 1;
 		return view;
 	}
 
@@ -89,7 +87,7 @@ public class Tab1_SuperFragment extends Fragment implements Tab1PageInfoCallback
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				// refreshThreadGetInfo();
-				CacheDataBmob_topnew.getInstence().getPapeInfo(Tab1_SuperFragment.this, text, type,true);
+				CacheDataBmob_super.getInstence().getPapeInfo(Tab1_SuperFragment.this, plantfrom,true);
 //				CacheData.getInstence().getPapeInfo(Tab1Fragment.this, text, type, true);
 			}
 		});
@@ -121,7 +119,7 @@ public class Tab1_SuperFragment extends Fragment implements Tab1PageInfoCallback
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent mIntent = new Intent(getActivity(), BookInfo_APIActivity.class);
-				mIntent.putExtra("linkUrl", contacters.get(position - 1).getLinkUrl());
+				mIntent.putExtra("linkUrl", contacters.get(position - 1).getId());
 				startActivity(mIntent);
 			}
 		});
@@ -131,14 +129,14 @@ public class Tab1_SuperFragment extends Fragment implements Tab1PageInfoCallback
 	public void onStart() {
 		super.onStart();
 //		CacheData.getInstence().getPapeInfo(this, text, type);
-		CacheDataBmob_topnew.getInstence().getPapeInfo(this, text, type);
+		CacheDataBmob_super.getInstence().getPapeInfo(this, plantfrom);
 		inintListener();
 	}
 
 	@Override
-	public void page1Info(List<BookInfoBean> firtPageBookInfo, boolean isrefresh) {
+	public void bookInfo(List<Book> getBookInfoSuperCallback, boolean isrefresh) {
 		Message message = mHandler.obtainMessage();
-		message.obj = firtPageBookInfo;
+		message.obj = getBookInfoSuperCallback;
 		if (!isrefresh) {
 			message.what = 1;
 			mHandler.sendMessage(message);
