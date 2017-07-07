@@ -1,5 +1,5 @@
 {
-    "android_gradle_plugin_version": "2.2.3",
+    "android_gradle_plugin_version": "2.3.3",
     "apk_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/build/outputs/apk/app-debug.apk",
     "apt": {
         
@@ -13,10 +13,10 @@
     "build_directory": "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/build",
     "build_script": "./gradlew :app:assembleDebug",
     "build_script_work_directory": "",
-    "build_tools_directory": "/Users/MaryLee/Android/adt-bundle-mac-x86_64-20140702/sdk/build-tools/23.0.1",
-    "build_tools_version": "23.0.1",
-    "compile_sdk_directory": "/Users/MaryLee/Android/adt-bundle-mac-x86_64-20140702/sdk/platforms/android-17",
-    "compile_sdk_version": "android-17",
+    "build_tools_directory": "/Users/MaryLee/Android/adt-bundle-mac-x86_64-20140702/sdk/build-tools/25.0.0",
+    "build_tools_version": "25.0.0",
+    "compile_sdk_directory": "/Users/MaryLee/Android/adt-bundle-mac-x86_64-20140702/sdk/platforms/android-23",
+    "compile_sdk_version": "android-23",
     "databinding": [
         
     ],
@@ -62,11 +62,7 @@
     "module_dependencies": {
         "app": [
             "meyGread_Library",
-            "pulltorefresh_library",
-            "cardview"
-        ],
-        "cardview": [
-            
+            "pulltorefresh_library"
         ],
         "meyGread_Library": [
             
@@ -87,10 +83,6 @@
         {
             "name": "pulltorefresh_library",
             "path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/pulltorefresh_library"
-        },
-        {
-            "name": "cardview",
-            "path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview"
         }
     ],
     "package": "com.doubook",
@@ -117,29 +109,6 @@
             "main_src_directory": [
                 "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/debug/java",
                 "/Users/MaryLee/AndroidStudioProjects/MDouBook/app/src/main/java"
-            ]
-        },
-        "cardview": {
-            "main_assets_directory": [
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/assets",
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/assets"
-            ],
-            "main_jniLibs_directory": [
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/jniLibs",
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/jniLibs"
-            ],
-            "main_jni_directory": [
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/jni",
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/jni"
-            ],
-            "main_manifest_path": "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/AndroidManifest.xml",
-            "main_res_directory": [
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/res",
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/res"
-            ],
-            "main_src_directory": [
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/release/java",
-                "/Users/MaryLee/AndroidStudioProjects/MDouBook/cardview/src/main/java"
             ]
         },
         "meyGread_Library": {

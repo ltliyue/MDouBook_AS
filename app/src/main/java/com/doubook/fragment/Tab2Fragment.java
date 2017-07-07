@@ -14,7 +14,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.doubook.R;
 import com.doubook.activity.BookInfo_APIActivity;
 import com.doubook.adapter.UserBookListAdapter;
@@ -23,20 +22,17 @@ import com.doubook.bean.Collections;
 import com.doubook.data.CacheData;
 import com.doubook.data.ContextData;
 import com.doubook.interf.Tab2PageInfoCallback;
-import com.doubook.thread.ExecutorProcessPool;
 import com.doubook.utiltools.LogsUtils;
-import com.doubook.utiltools.PreferencesUtils;
 import com.doubook.utiltools.ToastUtils;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnLastItemVisibleListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.AbsCallback;
 
 import java.util.List;
 
-import okhttp3.Call;
 import okhttp3.Response;
 
 public class Tab2Fragment extends Fragment implements Tab2PageInfoCallback {
@@ -181,55 +177,29 @@ public class Tab2Fragment extends Fragment implements Tab2PageInfoCallback {
 	}
 
 	private void openThreadGetInfo() {
-		ExecutorProcessPool.getInstance().execute(new Runnable() {
+		OkGo.<BaseCollection>post(ContextData.GetAccessToken).execute(new AbsCallback<BaseCollection>() {
+		    @Override
+		    public void onSuccess(com.lzy.okgo.model.Response<BaseCollection> response) {
+				contacters = response.body().getCollections();
+				LogsUtils.e("--contacters.size()->"+contacters.size());
+				if (contacters != null) {
+					mHandler.sendEmptyMessage(1);
+				} else {
+					ToastUtils.show(getActivity(), "没有数据");
+				}
+		    }
 
-			@Override
-			public void run() {
-				
-				OkHttpUtils
-						.get()
-						.url(ContextData.UserBookSave + PreferencesUtils.getString(getActivity(), "douban_user_id", "")
-								+ "/collections" + paramUrl).build().execute(new Callback<BaseCollection>() {
+		    @Override
+		    public BaseCollection convertResponse(Response response) throws Throwable {
+		        return null;
+		    }
 
-							@Override
-							public void onError(Call arg0, Exception arg1, int arg2) {
-								LogsUtils.e("-main->onError:" + arg1);
-							}
-
-							@Override
-							public void onResponse(BaseCollection arg0, int arg1) {
-							}
-
-							@Override
-							public BaseCollection parseNetworkResponse(Response arg0, int arg1) throws Exception {
-								BaseCollection baseCollection = JSON.parseObject(arg0.body().string(),
-										BaseCollection.class);
-								contacters = baseCollection.getCollections();
-								LogsUtils.e("--contacters.size()->"+contacters.size());
-								if (contacters != null) {
-									mHandler.sendEmptyMessage(1);
-								} else {
-									ToastUtils.show(getActivity(), "没有数据");
-								}
-								return baseCollection;
-							}
-						});
-			}
+		    @Override
+		    public void onError(com.lzy.okgo.model.Response<BaseCollection> response) {
+		        super.onError(response);
+		        LogsUtils.e(response.message());
+		    }
 		});
-		// new Thread() {
-		// @Override
-		// public void run() {
-		// contacters = null;
-		// userBookInfo = HttpUtils.httpGetString(ContextData.UserBookSave
-		// + PreferencesUtils.getString(getActivity(), "douban_user_id", "") +
-		// "/collections" + paramUrl);
-		// if (userBookInfo != null) {
-		// mHandler.sendEmptyMessage(1);
-		// } else {
-		// ToastUtils.show(getActivity(), "没有数据");
-		// }
-		// }
-		// }.start();
 	}
 
 	private void refreshThreadGetInfo() {

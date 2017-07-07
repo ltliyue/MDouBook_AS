@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/debug/layout/swipeback_layout.xml",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/layout/swipeback_layout.xml"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/debug/layout/catloading_main.xml",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/layout/catloading_main.xml"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/debug/layout/custom_progress_dialog_me.xml",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/layout/custom_progress_dialog_me.xml"
+    },
+    {
+        "merged": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/res/merged/debug/layout/slidingmenumain.xml",
+        "source": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/layout/slidingmenumain.xml"
+    }
+]

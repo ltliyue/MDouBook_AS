@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.alibaba.fastjson.JSON;
 import com.doubook.BaseActivty;
 import com.doubook.R;
 import com.doubook.adapter.PLListNewAdapter;
@@ -17,11 +16,11 @@ import com.doubook.bean.BaseReviews;
 import com.doubook.bean.Reviews;
 import com.doubook.data.ContextData;
 import com.doubook.utiltools.LogsUtils;
-import com.zhy.http.okhttp.callback.Callback;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.AbsCallback;
 
 import java.util.List;
 
-import okhttp3.Call;
 import okhttp3.Response;
 
 public class ReviewsListActivity extends BaseActivty {
@@ -86,26 +85,23 @@ public class ReviewsListActivity extends BaseActivty {
 		// https://api.douban.com/v2/book/26782094/reviews
 		// System.out.println(ContextData.UserBookReview + "26782094/reviews");
 		// loadData(true, ContextData.UserBookReview + "26782094/reviews", null,
-		loadData(true, ContextData.UserBookReview + getIntent().getStringExtra("bookid") + "/reviews", null,
-				new Callback<BaseReviews>() {
+		OkGo.<BaseReviews>post(ContextData.GetAccessToken).execute(new AbsCallback<BaseReviews>() {
+		    @Override
+		    public void onSuccess(com.lzy.okgo.model.Response<BaseReviews> response) {
+				reviews = response.body().getReviews();
+				mHandler.sendEmptyMessage(1);
+		    }
 
-					@Override
-					public void onError(Call arg0, Exception arg1, int arg2) {
-						LogsUtils.e(arg2 + "-->" + arg1);
-					}
+		    @Override
+		    public BaseReviews convertResponse(Response response) throws Throwable {
+		        return null;
+		    }
 
-					@Override
-					public void onResponse(BaseReviews arg0, int arg1) {
-					}
-
-					@Override
-					public BaseReviews parseNetworkResponse(Response response, int arg1) throws Exception {
-						BaseReviews fastJson = JSON.parseObject(response.body().string(), BaseReviews.class);
-						reviews = fastJson.getReviews();
-						mHandler.sendEmptyMessage(1);
-
-						return fastJson;
-					}
-				});
+		    @Override
+		    public void onError(com.lzy.okgo.model.Response<BaseReviews> response) {
+		        super.onError(response);
+		        LogsUtils.e(response.message());
+		    }
+		});
 	}
 }

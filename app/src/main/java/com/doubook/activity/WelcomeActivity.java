@@ -7,9 +7,9 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.LinearLayout;
 
-import com.alibaba.fastjson.JSON;
 import com.doubook.BaseActivty;
 import com.doubook.R;
+import com.doubook.activity.tab.MainActivity_Tab;
 import com.doubook.bean.BaseToken;
 import com.doubook.bean.Logs;
 import com.doubook.data.CacheData;
@@ -18,7 +18,8 @@ import com.doubook.data.ContextData;
 import com.doubook.utiltools.LogsUtils;
 import com.doubook.utiltools.NetWorkUtils;
 import com.doubook.utiltools.PreferencesUtils;
-import com.zhy.http.okhttp.callback.Callback;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.AbsCallback;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,7 +31,6 @@ import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import okhttp3.Call;
 import okhttp3.Response;
 
 public class WelcomeActivity extends BaseActivty {
@@ -152,39 +152,33 @@ public class WelcomeActivity extends BaseActivty {
      */
     private void getTokenData() {
         LogsUtils.e("-->更新getTokenData");
-        doSomethingInThread(new Runnable() {
+
+        Map<String, String> parasMap = new HashMap<String, String>();
+        parasMap.put("client_id", ContextData.APIKey);
+        parasMap.put("client_secret", ContextData.Secret);
+        parasMap.put("redirect_uri", ContextData.redirect_uri);
+        parasMap.put("grant_type", "refresh_token");
+        parasMap.put("refresh_token", PreferencesUtils.getString(ct, "refresh_token"));
+
+        OkGo.<BaseToken>post(ContextData.GetAccessToken).params(parasMap).execute(new AbsCallback<BaseToken>() {
+            @Override
+            public void onSuccess(com.lzy.okgo.model.Response<BaseToken> response) {
+                BaseToken baseToken = response.body();
+                PreferencesUtils.putString(WelcomeActivity.this, "access_token", baseToken.getAccess_token());
+                PreferencesUtils.putString(WelcomeActivity.this, "refresh_token", baseToken.getRefresh_token());
+
+                PreferencesUtils.putInt(ct, "DAY_OF_YEAR", Calendar.getInstance().get(Calendar.DAY_OF_YEAR));
+            }
 
             @Override
-            public void run() {
-                Map<String, String> parasMap = new HashMap<String, String>();
-                parasMap.put("client_id", ContextData.APIKey);
-                parasMap.put("client_secret", ContextData.Secret);
-                parasMap.put("redirect_uri", ContextData.redirect_uri);
-                parasMap.put("grant_type", "refresh_token");
-                parasMap.put("refresh_token", PreferencesUtils.getString(ct, "refresh_token"));
-                loadData(false, ContextData.GetAccessToken, parasMap, new Callback<BaseToken>() {
+            public BaseToken convertResponse(Response response) throws Throwable {
+                return null;
+            }
 
-                    @Override
-                    public void onError(Call arg0, Exception arg1, int arg2) {
-                        LogsUtils.e("-we->onError:" + arg1);
-                    }
-
-                    @Override
-                    public void onResponse(BaseToken arg0, int arg1) {
-                        LogsUtils.e("-we->onResponse:");
-                    }
-
-                    @Override
-                    public BaseToken parseNetworkResponse(Response response, int arg1) throws Exception {
-                        LogsUtils.e("-we->body:" + response.body().string());
-                        BaseToken baseToken = JSON.parseObject(response.body().string(), BaseToken.class);
-                        PreferencesUtils.putString(WelcomeActivity.this, "access_token", baseToken.getAccess_token());
-                        PreferencesUtils.putString(WelcomeActivity.this, "refresh_token", baseToken.getRefresh_token());
-
-                        PreferencesUtils.putInt(ct, "DAY_OF_YEAR", Calendar.getInstance().get(Calendar.DAY_OF_YEAR));
-                        return baseToken;
-                    }
-                });
+            @Override
+            public void onError(com.lzy.okgo.model.Response<BaseToken> response) {
+                super.onError(response);
+                LogsUtils.e(response.message());
             }
         });
     }

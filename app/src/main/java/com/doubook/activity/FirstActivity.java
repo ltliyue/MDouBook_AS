@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.doubook.R;
+import com.doubook.activity.tab.MainActivity_Tab;
 import com.doubook.utiltools.NetWorkUtils;
 import com.doubook.utiltools.PreferencesUtils;
 import com.doubook.utiltools.ToastUtils;

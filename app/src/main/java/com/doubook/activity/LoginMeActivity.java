@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.doubook.BaseActivty;
 import com.doubook.R;
+import com.doubook.activity.tab.MainActivity_Tab;
 import com.doubook.bean.User;
 import com.doubook.bean.UserInfoBean;
 import com.doubook.utiltools.PreferencesUtils;

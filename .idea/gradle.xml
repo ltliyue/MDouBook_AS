@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/cardview" />
             <option value="$PROJECT_DIR$/meyGread_Library" />
             <option value="$PROJECT_DIR$/pulltorefresh_library" />
           </set>

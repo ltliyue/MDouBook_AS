@@ -12,14 +12,9 @@ import com.cn.mey.swipebacklayout.lib.app.SwipeBackActivity;
 import com.doubook.activity.AppManager;
 import com.doubook.thread.ExecutorProcessFixedPool;
 import com.doubook.thread.ExecutorProcessPool;
-import com.doubook.utiltools.CommonUtil;
 import com.doubook.utiltools.CustomToast;
 import com.doubook.view.CustomProgressDialog;
 import com.doubook.view.DialogUtil;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
-
-import java.util.Map;
 
 public abstract class BaseActivty extends SwipeBackActivity implements OnClickListener {
 
@@ -101,19 +96,6 @@ public abstract class BaseActivty extends SwipeBackActivity implements OnClickLi
 
     protected void doSomethingInThread(Runnable runnable) {
         ExecutorProcessPool.getInstance().execute(runnable);
-    }
-
-    protected void loadData(boolean isGet, String url, Map<String, String> params, Callback callback) {
-        if (0 == CommonUtil.isNetworkAvailable(ct)) {
-            showToast("当前网络不可用，请检查网络设置！");
-            // missLonding();
-            return;
-        }
-        if (isGet) {
-            OkHttpUtils.get().url(url).params(params).build().execute(callback);
-        } else {
-            OkHttpUtils.post().url(url).params(params).build().execute(callback);
-        }
     }
 
     @Override

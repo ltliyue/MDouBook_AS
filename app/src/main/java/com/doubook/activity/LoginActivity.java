@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.doubook.BaseActivty;
 import com.doubook.R;
+import com.doubook.activity.tab.MainActivity_Tab;
 import com.doubook.bean.BaseToken;
 import com.doubook.bean.User;
 import com.doubook.bean.UserInfoBean;
@@ -19,8 +20,9 @@ import com.doubook.data.ContextData;
 import com.doubook.utiltools.LogsUtils;
 import com.doubook.utiltools.PreferencesUtils;
 import com.doubook.widget.MyProgressWebView;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.AbsCallback;
+import com.lzy.okgo.callback.Callback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -88,61 +90,40 @@ public class LoginActivity extends BaseActivty {
                         // 如果获得的code不为空，那么跳到httppost
                         if (code != "") {
                             showProgressDialog();
-                            doSomethingInThread(new Runnable() {
-                                public void run() {
 
-                                    Map<String, String> parasMap = new HashMap<String, String>();
-                                    parasMap.put("client_id", ContextData.APIKey);
-                                    parasMap.put("client_secret", ContextData.Secret);
-                                    parasMap.put("redirect_uri", ContextData.redirect_uri);
-                                    parasMap.put("grant_type", "authorization_code");
-                                    parasMap.put("code", code);
+                            Map<String, String> parasMap = new HashMap<String, String>();
+                            parasMap.put("client_id", ContextData.APIKey);
+                            parasMap.put("client_secret", ContextData.Secret);
+                            parasMap.put("redirect_uri", ContextData.redirect_uri);
+                            parasMap.put("grant_type", "authorization_code");
+                            parasMap.put("code", code);
 
-                                    loadData(false, ContextData.GetAccessToken, parasMap, new Callback<BaseToken>() {
 
+                            OkGo.<BaseToken>post(ContextData.GetAccessToken).params(parasMap).execute(new AbsCallback<BaseToken>() {
+                                @Override
+                                public void onSuccess(com.lzy.okgo.model.Response<BaseToken> response) {
+                                    getUserInfo(response.body());
+
+                                    response.body().save(new SaveListener<String>() {
                                         @Override
-                                        public void onError(Call arg0, Exception arg1, int arg2) {
-                                            LogsUtils.e("-onError->arg1:" + arg1);
-
-                                        }
-
-                                        @Override
-                                        public void onResponse(BaseToken arg0, int arg1) {
-                                            LogsUtils.e("-onResponse->arg1:" + arg1);
-                                        }
-
-                                        @Override
-                                        public BaseToken parseNetworkResponse(Response response, int arg1)
-                                                throws Exception {
-                                            BaseToken baseToken = JSON.parseObject(response.body().string(),
-                                                    BaseToken.class);
-
-                                            getUserInfo(baseToken);
-
-                                            baseToken.save(new SaveListener<String>() {
-                                                @Override
-                                                public void done(String s, BmobException e) {
-                                                    if (e == null) {
-                                                        LogsUtils.i("baseToken saved !");
-                                                    } else {
-                                                        LogsUtils.i("baseToken save failed !");
-                                                    }
-                                                }
-                                            });
-
-//                                            LogsUtils.e("-->resultURL222:" + baseToken.getAccess_token());
-//                                            PreferencesUtils.putString(LoginActivity.this, "access_token",
-//                                                    baseToken.getAccess_token());
-//                                            PreferencesUtils.putString(LoginActivity.this, "refresh_token",
-//                                                    baseToken.getRefresh_token());
-//                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_name",
-//                                                    baseToken.getDouban_user_name());
-//                                            PreferencesUtils.putString(LoginActivity.this, "douban_user_id",
-//                                                    baseToken.getDouban_user_id());
-
-                                            return baseToken;
+                                        public void done(String s, BmobException e) {
+                                            if (e == null) {
+                                                LogsUtils.i("baseToken saved !");
+                                            } else {
+                                                LogsUtils.i("baseToken save failed !");
+                                            }
                                         }
                                     });
+                                }
+
+                                @Override
+                                public BaseToken convertResponse(Response response) throws Throwable {
+                                    return null;
+                                }
+
+                                @Override
+                                public void onError(com.lzy.okgo.model.Response<BaseToken> response) {
+                                    super.onError(response);
                                 }
                             });
                         } else {
@@ -177,25 +158,24 @@ public class LoginActivity extends BaseActivty {
 
         String url = ContextData.GetUserInfo + baseToken.getDouban_user_id() + "?Authorization=" + baseToken.getAccess_token();
         LogsUtils.e("-->url:" + url);
-        OkHttpUtils.get().url(url).build().execute(new Callback<UserInfoBean>() {
 
+        OkGo.<UserInfoBean>post(ContextData.GetAccessToken).execute(new AbsCallback<UserInfoBean>() {
             @Override
-            public void onError(Call arg0, Exception arg1, int arg2) {
-                LogsUtils.e("-main->onError:" + arg1);
+            public void onSuccess(com.lzy.okgo.model.Response<UserInfoBean> response) {
+                saveNewAccount(response.body());
             }
 
             @Override
-            public void onResponse(UserInfoBean arg0, int arg1) {
+            public UserInfoBean convertResponse(Response response) throws Throwable {
+                return null;
             }
 
             @Override
-            public UserInfoBean parseNetworkResponse(Response arg0, int arg1) throws Exception {
-                UserInfoBean userInfoBean_dou = JSON.parseObject(arg0.body().string(), UserInfoBean.class);
-                saveNewAccount(userInfoBean_dou);
-                return userInfoBean_dou;
+            public void onError(com.lzy.okgo.model.Response<UserInfoBean> response) {
+                super.onError(response);
+                LogsUtils.e(response.message());
             }
         });
-
     }
 
     private void login(User user) {

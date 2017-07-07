@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MDouBook.iml" filepath="$PROJECT_DIR$/MDouBook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cardview/cardview.iml" filepath="$PROJECT_DIR$/cardview/cardview.iml" />
       <module fileurl="file://$PROJECT_DIR$/meyGread_Library/meyGread_Library.iml" filepath="$PROJECT_DIR$/meyGread_Library/meyGread_Library.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltorefresh_library/pulltorefresh_library.iml" filepath="$PROJECT_DIR$/pulltorefresh_library/pulltorefresh_library.iml" />
     </modules>

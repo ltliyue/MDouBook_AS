@@ -1,0 +1,165 @@
+[
+    {
+        "outputFile": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 58,
+                    "endOffset": 109
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/attrs.xml",
+                    "position": {
+                        "startLine": 59,
+                        "startColumn": 4,
+                        "startOffset": 2327,
+                        "endColumn": 59,
+                        "endOffset": 2382
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1608,
+                    "endColumn": 57,
+                    "endOffset": 1661
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 92,
+                        "endColumn": 57,
+                        "endOffset": 145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1666,
+                    "endColumn": 55,
+                    "endOffset": 1717
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 151,
+                        "endColumn": 55,
+                        "endOffset": 202
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1722,
+                    "endColumn": 42,
+                    "endOffset": 1760
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/ids.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 42,
+                        "endOffset": 93
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1765,
+                    "endColumn": 54,
+                    "endOffset": 1815
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 4,
+                        "startOffset": 16,
+                        "endColumn": 54,
+                        "endOffset": 66
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1820,
+                    "endLine": 27,
+                    "endColumn": 12,
+                    "endOffset": 1951
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/styles.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 54,
+                        "endLine": 5,
+                        "endColumn": 12,
+                        "endOffset": 185
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1956,
+                    "endLine": 33,
+                    "endColumn": 12,
+                    "endOffset": 2235
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/styles.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 788,
+                        "endLine": 23,
+                        "endColumn": 12,
+                        "endOffset": 1067
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 2240,
+                    "endLine": 43,
+                    "endColumn": 12,
+                    "endOffset": 2831
+                },
+                "from": {
+                    "file": "/Users/MaryLee/AndroidStudioProjects/MDouBook/meyGread_Library/src/main/res/values/styles.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 191,
+                        "endLine": 16,
+                        "endColumn": 12,
+                        "endOffset": 782
+                    }
+                }
+            }
+        ]
+    }
+]
