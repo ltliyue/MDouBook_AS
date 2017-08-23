@@ -1,16 +1,10 @@
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="#F8FAF5"--><!--android:orientation="vertical">-->
-
-<!--<com.handmark.pulltorefresh.library.PullToRefreshListView--><!--android:id="@+id/list_of_booknav"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:cacheColorHint="#00000000"--><!--android:divider="@null"--><!--android:fadingEdge="none"--><!--android:listSelector="#00000000"--><!--android:smoothScrollbar="true" />-->
-
-<!--<include--><!--android:id="@id/loading_view"--><!--layout="@layout/custom_progress_dialog_me" />--><!--</RelativeLayout>-->
-
 
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_refresh_widget"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f7f1ed">
+    android:background="#EFF4F8">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_of"

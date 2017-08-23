@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.doubook.BaseActivty;
 import com.doubook.R;
 import com.doubook.activity.tab.MainActivity_Tab;
+import com.doubook.bean.BaseToken;
 import com.doubook.bean.User;
 import com.doubook.bean.UserInfoBean;
 import com.doubook.utiltools.PreferencesUtils;
@@ -103,18 +104,29 @@ public class LoginMeActivity extends BaseActivty {
             case R.id.btn_login:
                 doLogin();
                 break;
+
+            //豆瓣账号登录
             case R.id.dou_login_btn:
+                showProgressDialog();
+                //当前逻辑：
+                //查看当前手机是否注册过 并且已授权，
+                //注册过：取出bmob账号，登录（问题：无法获得token）-->解决：另外一张表存token，通过douid获取
+                //没注册过：授权登录
                 BmobQuery<User> bmobQuery = new BmobQuery<>();
                 bmobQuery.addWhereEqualTo("installationId", BmobInstallation.getInstallationId(LoginMeActivity.this));
+                bmobQuery.addWhereEqualTo("isAuthorization", true);
                 bmobQuery.findObjects(new FindListener<User>() {
                     @Override
                     public void done(List<User> list, BmobException e) {
                         if (e == null) {
+                            final User user = list.get(0);
+                            user.setPassword(user.getUsername());
                             list.get(0).login(new SaveListener<UserInfoBean>() {
                                 @Override
                                 public void done(UserInfoBean userInfoBean, BmobException e) {
                                     if (e == null) {
                                         closeProgressDialog();
+                                        getUserToken(user.getDou_id());
                                         showToast("登录成功~");
                                         mIntent = new Intent(LoginMeActivity.this, MainActivity_Tab.class);
                                         startActivity(mIntent);
@@ -138,6 +150,23 @@ public class LoginMeActivity extends BaseActivty {
                 startActivity(mIntent);
                 break;
         }
+    }
+
+    /**
+     * 或得用户token
+     */
+    private void getUserToken(String douID) {
+        BmobQuery<BaseToken> baseTokenBmobQuery = new BmobQuery<>();
+        baseTokenBmobQuery.addWhereEqualTo("douban_user_id", douID);
+        baseTokenBmobQuery.findObjects(new FindListener<BaseToken>() {
+            @Override
+            public void done(List<BaseToken> list, BmobException e) {
+                if (e == null) {
+                    BaseToken baseToken = list.get(0);
+
+                }
+            }
+        });
     }
 
 

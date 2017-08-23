@@ -8,10 +8,15 @@ import cn.bmob.v3.datatype.BmobGeoPoint;
  */
 
 public class User extends BmobUser {
+    //meyaooo
     private String uid;
+    //描述
     private String desc;
+    //大头像
     private String large_avatar;
+    //签名
     private String signature;
+    //MUMei
     private String name;
 
     private String dou_id;

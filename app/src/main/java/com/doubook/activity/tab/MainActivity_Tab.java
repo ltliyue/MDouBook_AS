@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,15 +20,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cn.mey.slidingmenu.lib.SlidingMenu;
 import com.doubook.R;
 import com.doubook.activity.AppManager;
 import com.doubook.activity.LoginMeActivity;
-import com.doubook.activity.map.MarkerClickActivity;
 import com.doubook.bean.BaseCollection;
 import com.doubook.bean.BookInfoBean_Api;
+import com.doubook.bean.Collections;
 import com.doubook.bean.User;
 import com.doubook.bean.UserInfoBean;
 import com.doubook.data.CacheData;
@@ -43,11 +43,14 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.AbsCallback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobBatch;
+import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListListener;
 import okhttp3.Response;
 
 public class MainActivity_Tab extends TabActivity {
@@ -292,8 +295,10 @@ public class MainActivity_Tab extends TabActivity {
                 .setContent(new Intent(this, Tab_Main1Activity.class)));
         tabhost.addTab(tabhost.newTabSpec("top").setIndicator("11")
                 .setContent(new Intent(this, Tab_Main2Activity.class)));
+//        tabhost.addTab(tabhost.newTabSpec("dou").setIndicator("22")
+//                .setContent(new Intent(this, MarkerClickActivity.class)));
         tabhost.addTab(tabhost.newTabSpec("dou").setIndicator("22")
-                .setContent(new Intent(this, MarkerClickActivity.class)));
+                .setContent(new Intent(this, Tab_MyDouActivity.class)));
         tabhost.addTab(tabhost.newTabSpec("more").setIndicator("33")
                 .setContent(new Intent(this, Tab_Main3Activity.class)));
         for (int i = 0; i < radioButton.length; i++) {
@@ -317,26 +322,26 @@ public class MainActivity_Tab extends TabActivity {
     private void getUserInfo() {
         User user = User.getCurrentUser(User.class);
         if (user != null) {
-            if (user.isAuthorization()) {
-                BmobQuery<UserInfoBean> bmobQuery = new BmobQuery<>();
-                bmobQuery.addWhereEqualTo("id", user.getDou_id());
-                bmobQuery.findObjects(new FindListener<UserInfoBean>() {
-                    @Override
-                    public void done(List<UserInfoBean> list, BmobException e) {
-                        if (e == null) {
-                            userInfoBean = list.get(0);
-                            mHandler.sendEmptyMessage(2);
-                        } else {
-                            Toast.makeText(MainActivity_Tab.this, "获取用户信息失败", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            } else {
-                Message message = mHandler.obtainMessage();
-                message.what = 3;
-                message.obj = user;
-                mHandler.sendMessage(message);
-            }
+//            if (user.isAuthorization()) {
+//                BmobQuery<UserInfoBean> bmobQuery = new BmobQuery<>();
+//                bmobQuery.addWhereEqualTo("id", user.getDou_id());
+//                bmobQuery.findObjects(new FindListener<UserInfoBean>() {
+//                    @Override
+//                    public void done(List<UserInfoBean> list, BmobException e) {
+//                        if (e == null) {
+//                            userInfoBean = list.get(0);
+//                            mHandler.sendEmptyMessage(2);
+//                        } else {
+//                            Toast.makeText(MainActivity_Tab.this, "获取用户信息失败", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            } else {
+            Message message = mHandler.obtainMessage();
+            message.what = 3;
+            message.obj = user;
+            mHandler.sendMessage(message);
+//            }
         }
     }
 
@@ -346,9 +351,9 @@ public class MainActivity_Tab extends TabActivity {
     private void getBookNum() {
         String url = ContextData.UserBookSave + PreferencesUtils.getString(MainActivity_Tab.this, "douban_user_id", "")
                 + "/collections";
-        ExecutorProcessFixedPool.getInstance().execute(new ExcuteTask(url + "?status=wish", 11));
-        ExecutorProcessFixedPool.getInstance().execute(new ExcuteTask(url + "?status=reading", 12));
-        ExecutorProcessFixedPool.getInstance().execute(new ExcuteTask(url + "?status=read", 13));
+        ExecutorProcessFixedPool.getInstance().execute(new ExcuteUserCollectionsTask(url + "?status=wish", 11));
+        ExecutorProcessFixedPool.getInstance().execute(new ExcuteUserCollectionsTask(url + "?status=reading", 12));
+        ExecutorProcessFixedPool.getInstance().execute(new ExcuteUserCollectionsTask(url + "?status=read", 13));
     }
 
     @Override
@@ -390,24 +395,51 @@ public class MainActivity_Tab extends TabActivity {
         }
     }
 
-    class ExcuteTask implements Runnable {
+    /**
+     * 获取用户收藏的Runnable
+     */
+    class ExcuteUserCollectionsTask implements Runnable {
         private int handleMessage;
         private String url;
 
-        public ExcuteTask(String url, int handleMessage) {
+        public ExcuteUserCollectionsTask(String url, int handleMessage) {
             this.handleMessage = handleMessage;
             this.url = url;
         }
 
         @Override
         public void run() {
-            OkGo.<BaseCollection>post(ContextData.GetAccessToken).execute(new AbsCallback<BaseCollection>() {
+            OkGo.<BaseCollection>get(url).execute(new AbsCallback<BaseCollection>() {
                 @Override
                 public void onSuccess(com.lzy.okgo.model.Response<BaseCollection> response) {
                     BaseCollection baseCollection = response.body();
                     switch (handleMessage) {
                         case 11:
                             wish = (int) baseCollection.getTotal();
+
+                            List<BmobObject> collections = new ArrayList<BmobObject>();
+                            for (Collections collection : baseCollection.getCollections()
+                                    ) {
+                                collections.add(collection);
+                            }
+                            new BmobBatch().insertBatch(collections).doBatch(new QueryListListener<BatchResult>() {
+                                @Override
+                                public void done(List<BatchResult> list, BmobException e) {
+                                    if (e == null) {
+                                        for (int i = 0; i < list.size(); i++) {
+                                            BatchResult result = list.get(i);
+                                            BmobException ex = result.getError();
+                                            if (ex == null) {
+                                                LogsUtils.i("第" + i + "个数据批量添加成功：" + result.getCreatedAt() + "," + result.getObjectId() + "," + result.getUpdatedAt());
+                                            } else {
+                                                LogsUtils.e("第" + i + "个数据批量添加失败：" + ex.getMessage() + "," + ex.getErrorCode());
+                                            }
+                                        }
+                                    } else {
+                                        Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
+                                    }
+                                }
+                            });
                             CacheData.setCollections_wish(baseCollection.getCollections());
                             break;
                         case 12:

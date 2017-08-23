@@ -9,7 +9,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.doubook.BaseActivty;
 import com.doubook.R;
 import com.doubook.activity.tab.MainActivity_Tab;
@@ -22,7 +21,6 @@ import com.doubook.utiltools.PreferencesUtils;
 import com.doubook.widget.MyProgressWebView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.AbsCallback;
-import com.lzy.okgo.callback.Callback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +28,6 @@ import java.util.Map;
 import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
-import okhttp3.Call;
 import okhttp3.Response;
 
 /**
@@ -52,9 +49,6 @@ public class LoginActivity extends BaseActivty {
     protected void initData() {
         myWebView = (MyProgressWebView) findViewById(R.id.webviewid);
         initWebView();
-//        DoubookCrawlTest doubookCrawlTest = new DoubookCrawlTest();
-//        String codes = doubookCrawlTest.doLoginByHtmlUnit("ltliyue@gmail.com", "liyue0016");
-//        LogsUtils.e("--->code::" + codes);
     }
 
     @Override
@@ -71,11 +65,6 @@ public class LoginActivity extends BaseActivty {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
-            }
-
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                System.out.println("系统出错");
             }
 
             @Override
@@ -102,8 +91,15 @@ public class LoginActivity extends BaseActivty {
                             OkGo.<BaseToken>post(ContextData.GetAccessToken).params(parasMap).execute(new AbsCallback<BaseToken>() {
                                 @Override
                                 public void onSuccess(com.lzy.okgo.model.Response<BaseToken> response) {
-                                    getUserInfo(response.body());
 
+                                    BaseToken baseToken = response.body();
+
+                                    LogsUtils.i("-->get token onSuccess");
+
+                                    getUserInfo(baseToken);
+
+                                    //保存Token
+//                                    baseToken.setInstallationId(BmobInstallation.getInstallationId(LoginActivity.this));
                                     response.body().save(new SaveListener<String>() {
                                         @Override
                                         public void done(String s, BmobException e) {
@@ -150,16 +146,14 @@ public class LoginActivity extends BaseActivty {
     }
 
     /**
-     * 用户信息
+     * 3.获得用户信息
      */
     private void getUserInfo(BaseToken baseToken) {
-
-//        final BaseToken baseToken_f = baseToken;
 
         String url = ContextData.GetUserInfo + baseToken.getDouban_user_id() + "?Authorization=" + baseToken.getAccess_token();
         LogsUtils.e("-->url:" + url);
 
-        OkGo.<UserInfoBean>post(ContextData.GetAccessToken).execute(new AbsCallback<UserInfoBean>() {
+        OkGo.<UserInfoBean>get(url).execute(new AbsCallback<UserInfoBean>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<UserInfoBean> response) {
                 saveNewAccount(response.body());
@@ -178,6 +172,48 @@ public class LoginActivity extends BaseActivty {
         });
     }
 
+    /**
+     * 4. 获取douban信息组装 保存本地账户
+     *
+     * @param userInfoBean_dou
+     */
+    private void saveNewAccount(UserInfoBean userInfoBean_dou) {
+
+        User user = new User();
+        user.setUsername(userInfoBean_dou.getName());
+        user.setPassword(userInfoBean_dou.getName());
+
+        user.setDou_id(userInfoBean_dou.getId());
+        user.setLarge_avatar(userInfoBean_dou.getLarge_avatar());
+        user.setDesc(userInfoBean_dou.getDesc());
+        user.setName(userInfoBean_dou.getName());
+        user.setUid(userInfoBean_dou.getUid());
+        user.setSignature(userInfoBean_dou.getSignature());
+
+        user.setAuthorization(true);//豆瓣账号
+        user.setInstallationId(BmobInstallation.getInstallationId(LoginActivity.this));
+        user.signUp(new SaveListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if (e == null) {
+                    LogsUtils.i("注册本地账号成功");
+                    //登录
+                    login(user);
+//                    userInfoBean_dou.setUser(user);
+                    //保存豆瓣账户&&关联本地账户
+//                    saveDouAccount(userInfoBean_dou);
+                } else {
+                    LogsUtils.e(e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 5. 登录本地bmob账户
+     *
+     * @param user
+     */
     private void login(User user) {
         //登录本地账户
         user.login(new SaveListener<UserInfoBean>() {
@@ -196,6 +232,11 @@ public class LoginActivity extends BaseActivty {
         });
     }
 
+    /**
+     * 6.保存豆瓣账户到bmob
+     *
+     * @param userInfoBean_dou
+     */
     private void saveDouAccount(UserInfoBean userInfoBean_dou) {
         //保存豆瓣账户&&关联本地账户
 //        userInfoBean_dou.setInstallationId(BmobInstallation.getInstallationId(LoginActivity.this));
@@ -211,34 +252,5 @@ public class LoginActivity extends BaseActivty {
         });
     }
 
-    /**
-     * 保存本地账户
-     *
-     * @param userInfoBean_dou
-     */
-    private void saveNewAccount(final UserInfoBean userInfoBean_dou) {
 
-        User user = new User();
-        user.setUsername(userInfoBean_dou.getName());
-        user.setPassword(userInfoBean_dou.getName());
-        user.setDou_id(userInfoBean_dou.getId());
-        user.setAuthorization(true);//豆瓣账号
-        user.setInstallationId(BmobInstallation.getInstallationId(LoginActivity.this));
-        user.signUp(new SaveListener<User>() {
-            @Override
-            public void done(User user, BmobException e) {
-                if (e == null) {
-                    LogsUtils.i("注册本地账号成功");
-                    //登录
-                    login(user);
-
-                    userInfoBean_dou.setUser(user);
-                    //保存豆瓣账户&&关联本地账户
-                    saveDouAccount(userInfoBean_dou);
-                } else {
-                    LogsUtils.e(e.getMessage());
-                }
-            }
-        });
-    }
 }

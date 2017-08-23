@@ -3,7 +3,6 @@ package com.doubook.getinfotools;
 import com.doubook.bean.BaseCollection;
 import com.doubook.bean.Collections;
 import com.doubook.data.CacheData;
-import com.doubook.data.ContextData;
 import com.doubook.interf.Tab2PageInfoCallback;
 import com.doubook.utiltools.LogsUtils;
 import com.lzy.okgo.OkGo;
@@ -38,7 +37,7 @@ public class JsoupOkHttpGetInfo {
     }
 
     private void getMyBookInfo() {
-        OkGo.<BaseCollection>post(ContextData.GetAccessToken).execute(new AbsCallback<BaseCollection>() {
+        OkGo.<BaseCollection>get(url).execute(new AbsCallback<BaseCollection>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<BaseCollection> response) {
                 List<Collections> getFirtPageBookInfo = response.body().getCollections();

@@ -21,12 +21,8 @@ import java.util.List;
  */
 public class ItemArticleAdapter extends RecyclerView.Adapter<ItemArticleAdapter.ImageItemArticleViewHolder> {
 
-    //新闻列表
     private List<MarketBook> articleList;
-
-    //context
     private Context context;
-
     private LayoutInflater mLayoutInflater;
 
 

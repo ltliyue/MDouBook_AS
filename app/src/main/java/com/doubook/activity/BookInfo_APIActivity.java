@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.doubook.BaseActivty;
 import com.doubook.R;
 import com.doubook.bean.Book;
@@ -124,17 +125,16 @@ public class BookInfo_APIActivity extends BaseActivty {
     public void getUserinfo() {
         LogsUtils.e(ContextData.BooksInfo + bookid);
 
-        OkGo.<Book>post(ContextData.GetAccessToken).execute(new AbsCallback<Book>() {
+        OkGo.<Book>get(ContextData.BooksInfo + bookid).execute(new AbsCallback<Book>() {
             @Override
             public void onSuccess(com.lzy.okgo.model.Response<Book> response) {
-
-                books = response.body();
-                mHandler.sendEmptyMessage(1);
             }
 
             @Override
             public Book convertResponse(Response response) throws Throwable {
-                return null;
+                books = JSON.parseObject(response.body().string(),Book.class);
+                mHandler.sendEmptyMessage(1);
+                return books;
             }
 
             @Override

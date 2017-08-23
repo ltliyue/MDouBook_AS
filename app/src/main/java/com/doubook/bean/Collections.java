@@ -3,7 +3,9 @@ package com.doubook.bean;
 import org.json.*;
 import java.util.ArrayList;
 
-public class Collections {
+import cn.bmob.v3.BmobObject;
+
+public class Collections extends BmobObject {
 
 	private String status;
 	private Rating rating;

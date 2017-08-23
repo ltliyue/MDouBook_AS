@@ -3,7 +3,9 @@ package com.doubook.bean;
 import org.json.*;
 import java.util.ArrayList;
 
-public class Book {
+import cn.bmob.v3.BmobObject;
+
+public class Book extends BmobObject{
 
 	private String isbn13;
 	private ArrayList<String> author;

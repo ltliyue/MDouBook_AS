@@ -1,14 +1,19 @@
 package com.doubook.bean;
 
-import org.json.*;
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-public class BaseCollection {
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.bmob.v3.BmobObject;
+
+public class BaseCollection extends BmobObject {
 	
     private double start;
     private double count;
     private double total;
-    private ArrayList<Collections> collections;
+    private List<Collections> collections;
     
     
 	public BaseCollection () {
@@ -66,7 +71,7 @@ public class BaseCollection {
         this.total = total;
     }
 
-    public ArrayList<Collections> getCollections() {
+    public List<Collections> getCollections() {
         return this.collections;
     }
 

@@ -1,64 +1,75 @@
 package com.doubook.adapter;
 
-import java.util.List;
-
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.doubook.R;
-import com.doubook.MyBaseAdapter;
 import com.doubook.bean.Book;
 import com.doubook.bean.Collections;
 import com.squareup.picasso.Picasso;
 
-public class UserBookListAdapter extends MyBaseAdapter<Collections, ListView> {
-	public UserBookListAdapter(Context context, List<Collections> list) {
-		super(context, list);
-	}
+import java.util.List;
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
 
-		ViewHolder holder = null;
-		if (convertView == null) {
+public class UserBookListAdapter extends RecyclerView.Adapter<UserBookListAdapter.ViewHolder> {
 
-			holder = new ViewHolder();
+    List<Collections> list;
+    private Context context;
+    private LayoutInflater mLayoutInflater;
 
-			convertView = View.inflate(context, R.layout.contact_list_item, null);
-			holder.ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
-			holder.point = (TextView) convertView.findViewById(R.id.point);
-			holder.imageView = (ImageView) convertView.findViewById(R.id.portrait);
-			holder.name = (TextView) convertView.findViewById(R.id.name);
-			holder.bookinfo = (TextView) convertView.findViewById(R.id.bookinfo);
-			convertView.setTag(holder);
-		} else {
+    public UserBookListAdapter(Context context, List<Collections> list) {
+        this.context = context;
+        this.list = list;
+        mLayoutInflater = LayoutInflater.from(context);
+    }
 
-			holder = (ViewHolder) convertView.getTag();
+    @Override
+    public UserBookListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-		}
-		Book book = list.get(position).getBook();
+        View view = mLayoutInflater.inflate(
+                R.layout.contact_list_item, parent, false);
 
-		Picasso.with(context).load(book.getImage()).into(holder.imageView);
-		holder.name.setText(book.getTitle());
-		holder.ratingBar.setRating(Float.parseFloat(book.getRating().getAverage()) / 2);
-		holder.point.setText(book.getRating().getAverage() + " (" + book.getRating().getNumRaters() + ")");
-		holder.bookinfo.setText(book.getAuthor().toString() + "/" + book.getPubdate() + "/" + book.getPublisher() + "/"
-				+ book.getPrice() + "/" + book.getBinding());
+        return new ViewHolder(view);
+    }
 
-		return convertView;
-	}
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Book book = list.get(position).getBook();
+        Picasso.with(context).load(book.getImage()).into(holder.imageView);
+        holder.name.setText(book.getTitle());
+        holder.ratingBar.setRating(Float.parseFloat(book.getRating().getAverage()) / 2);
+        holder.point.setText(book.getRating().getAverage() + " (" + book.getRating().getNumRaters() + ")");
+        holder.bookinfo.setText(book.getAuthor().toString() + "/" + book.getPubdate() + "/" + book.getPublisher() + "/"
+                + book.getPrice() + "/" + book.getBinding());
 
-	class ViewHolder {
-		RatingBar ratingBar;
-		TextView point;
-		ImageView imageView;
-		TextView name;
-		TextView bookinfo;
-	}
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        RatingBar ratingBar;
+        TextView point;
+        ImageView imageView;
+        TextView name;
+        TextView bookinfo;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
+            point = (TextView) itemView.findViewById(R.id.point);
+            imageView = (ImageView) itemView.findViewById(R.id.portrait);
+            name = (TextView) itemView.findViewById(R.id.name);
+            bookinfo = (TextView) itemView.findViewById(R.id.bookinfo);
+        }
+    }
 
 }

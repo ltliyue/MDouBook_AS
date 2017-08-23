@@ -4,11 +4,14 @@
     android:id="@+id/cv_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="#ffffff"
-    app:cardElevation="5dp"
     app:cardCornerRadius="0dp"
-    app:contentPadding="5dp">
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="true"
+    app:contentPadding="0dp">
 
     <RelativeLayout
         android:id="@+id/ll"

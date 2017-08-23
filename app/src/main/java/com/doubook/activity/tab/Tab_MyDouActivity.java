@@ -1,10 +1,5 @@
 package com.doubook.activity.tab;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,10 +24,16 @@ import com.doubook.activity.AppManager;
 import com.doubook.adapter.NewsFragmentPagerAdapter;
 import com.doubook.bean.PageMenuBean;
 import com.doubook.fragment.Tab2Fragment;
-import com.doubook.utiltools.PreferencesUtils;
 import com.doubook.utiltools.ToastUtils;
 import com.doubook.utiltools.Tools;
 import com.doubook.view.ColumnHorizontalScrollView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import cn.bmob.v3.BmobUser;
 
 /**
  * tab2我的豆瓣
@@ -88,10 +89,14 @@ public class Tab_MyDouActivity extends FragmentActivity {
         intentFilter.addAction("com.doubook.mydoupage");
         this.registerReceiver(broadcastReceiver, intentFilter);
 
-        if ("".equals(PreferencesUtils.getString(Tab_MyDouActivity.this, "access_token", ""))) {
+        if (BmobUser.getCurrentUser()==null){
             ToastUtils.show(this, "您未登录");
             return;
         }
+//        if ("".equals(PreferencesUtils.getString(Tab_MyDouActivity.this, "access_token", ""))) {
+//            ToastUtils.show(this, "您未登录");
+//            return;
+//        }
         setContentView(R.layout.activity_first_tab);
         mScreenWidth = Tools.getWindowsWidth(this);
         mItemWidth = mScreenWidth / 5;// 一个Item宽度为屏幕的1/4
